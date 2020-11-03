@@ -1,5 +1,7 @@
 package ohjelmistoprojekti1.com.example.kyselylomake.domain;
 
-public interface VastausRepository {
+import org.springframework.data.repository.CrudRepository;
+
+public interface VastausRepository extends CrudRepository<Vastaus, Long>{
 
 }
