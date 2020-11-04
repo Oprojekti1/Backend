@@ -1,9 +1,25 @@
 package ohjelmistoprojekti1.kyselylomake.domain;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
+@Entity
 public class Vastaus {
-private Long id;
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
+private Long vastid;
 private String radiovast;
 
+@JsonBackReference
+@ManyToOne
+@JoinColumn(name = "kysid")
+private Kysymys kysymys;
 
 
 public Vastaus() {
@@ -12,29 +28,23 @@ public Vastaus() {
 
 
 
-public Vastaus(String radiovast) {
+
+public Vastaus(String radiovast, Kysymys kysymys) {
 	super();
 	this.radiovast = radiovast;
+	this.kysymys = kysymys;
 }
 
 
 
-public Vastaus(Long id, String radiovast) {
-	super();
-	this.id = id;
-	this.radiovast = radiovast;
+public Long getVastid() {
+	return vastid;
 }
 
 
 
-public Long getId() {
-	return id;
-}
-
-
-
-public void setId(Long id) {
-	this.id = id;
+public void setVastid(Long vastid) {
+	this.vastid = vastid;
 }
 
 
@@ -51,10 +61,27 @@ public void setRadiovast(String radiovast) {
 
 
 
+
+
+public Kysymys getKysymys() {
+	return kysymys;
+}
+
+
+
+public void setKysymys(Kysymys kysymys) {
+	this.kysymys = kysymys;
+}
+
+
+
 @Override
 public String toString() {
-	return "Vastaus [id=" + id + ", radiovast=" + radiovast + "]";
+	return "Vastaus [vastid=" + vastid + ", radiovast=" + radiovast + ", kysymys=" + this.getKysymys() + "]";
 }
+
+
+
 
 
 

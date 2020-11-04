@@ -31,13 +31,13 @@ public class KyselylomakeApplication {
 			
       		krepository.save(k1);
 			
-			Vastaus v1 = new Vastaus("Mies");
-			Vastaus v2 = new Vastaus("Nainen");
-			Vastaus v3 = new Vastaus("Muu");
+			 Vastaus v1 = new Vastaus("Mies", k1);
+			 Vastaus v2 = new Vastaus("Nainen", k1);
+			Vastaus v3 = new Vastaus("Muu", k1);
 			
 			vrepository.save(v1);
 			vrepository.save(v2);
-			vrepository.save(v3);
+     		vrepository.save(v3);
 			
 			log.info("fetch kysymykset");
 			for (Kysymys kysymys : krepository.findAll()) {
