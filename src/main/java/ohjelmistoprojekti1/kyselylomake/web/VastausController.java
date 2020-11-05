@@ -23,7 +23,7 @@ public class VastausController {
 	
 
 	// Restful service to get question by id
-    @RequestMapping(value="/vastauskset/{vastid}", method = RequestMethod.GET)
+    @RequestMapping(value="/vastaukset/{vastid}", method = RequestMethod.GET)
     public @ResponseBody Optional<Vastaus> findKysRest(@PathVariable("vastid") Long vastid) {	
     	return vastausRepository.findById(vastid);
     }  
