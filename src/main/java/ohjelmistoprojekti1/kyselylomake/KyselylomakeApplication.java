@@ -24,7 +24,7 @@ public class KyselylomakeApplication {
 	}
 	
 	 @Bean
-	public CommandLineRunner demo(KysymysRepository krepository, VastausRepository vrepository) {
+	public CommandLineRunner demo(KysymysRepository krepository, VastausRepository vastausRepository) {
 		return (args) -> {
 			log.info("Tallenna kysymyksiä");
 			Kysymys k1 = new Kysymys("Mikä on sukupuolesi?");
@@ -35,9 +35,9 @@ public class KyselylomakeApplication {
 			 Vastaus v2 = new Vastaus("Nainen", k1);
 			Vastaus v3 = new Vastaus("Muu", k1);
 			
-			vrepository.save(v1);
-			vrepository.save(v2);
-     		vrepository.save(v3);
+			vastausRepository.save(v1);
+			vastausRepository.save(v2);
+     		vastausRepository.save(v3);
 			
 			log.info("fetch kysymykset");
 			for (Kysymys kysymys : krepository.findAll()) {
@@ -45,7 +45,7 @@ public class KyselylomakeApplication {
 			}
 			
 			log.info("fetch vastaukset");
-			for (Vastaus vastaus : vrepository.findAll()) {
+			for (Vastaus vastaus : vastausRepository.findAll()) {
 				log.info(vastaus.toString());
 			}
 			
