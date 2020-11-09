@@ -20,29 +20,33 @@ import ohjelmistoprojekti1.kyselylomake.domain.VastausRepository;
 @CrossOrigin
 @Controller
 public class VastausController {
-	
+
 	@Autowired
 	private VastausRepository vastausRepository;
+
+	@Autowired
+	private KysymysRepository kysrepository;
+
+	// Restful service to get all vastaus
+	@RequestMapping(value = "/vastaukset", method = RequestMethod.GET)
+	public @ResponseBody List<Vastaus> vasListRest() {
+		return (List<Vastaus>) vastausRepository.findAll();
+	}
+
+	// Restful service to get vastaus by id
+	@RequestMapping(value = "/vastaukset/{vastid}", method = RequestMethod.GET)
+	public @ResponseBody Vastaus findVastRest(@PathVariable("vastid") Long vastid) {
+		return vastausRepository.findByVastid(vastid);
+	}
 	
-    @Autowired
-    private KysymysRepository kysrepository;
-	
-	  @RequestMapping(value="/vastaukset", method = RequestMethod.GET)
-      public @ResponseBody List<Vastaus> vasListRest() {   
-          return (List<Vastaus>) vastausRepository.findAll();
-      }
-	  
-	// Restful service to get question by id
-    @RequestMapping(value="/vastaukset/{vastid}", method = RequestMethod.GET)
-    public @ResponseBody Optional<Vastaus> findKysRest(@PathVariable("vastid") Long vastid) {	
-    	return vastausRepository.findById(vastid);
-    }  
-    
-	 // Restful service to save a new question
-    @RequestMapping(value="/vastaus/{kysid}", method = RequestMethod.POST)
-    public @ResponseBody Vastaus saveVastRest(@PathVariable("kysid") Long kysid, @RequestBody Vastaus vastaus) {	
-    	Kysymys kysymys = kysrepository.findById(kysid).get();
-    	vastaus.setKysymys(kysymys);
-    	return vastausRepository.save(vastaus);
-    }
+
+	// Restful service to save a new vastaus
+	@RequestMapping(value = "/vastaus/{kysid}", method = RequestMethod.POST)
+	public @ResponseBody Vastaus saveVastRest(@PathVariable("kysid") Long kysid, @RequestBody Vastaus vastaus) {
+		//vastausRepository.save(vastaus);
+		// vastaus = vastausRepository.findByVastid(kysid);
+		Kysymys kysymys = kysrepository.findByKysid(kysid);
+		vastaus.setKysymys(kysymys);
+		return vastausRepository.save(vastaus);
+	}
 }
