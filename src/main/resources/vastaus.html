@@ -1,0 +1,26 @@
+<!DOCTYPE HTML>
+
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+<title>Vastaukset</title>
+
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+</head>
+
+<body>
+	<h1>Vastaukset</h1>
+	<table>
+		<tr>
+
+			<th>Vastaus</th>
+		</tr>
+		<tr th:each="vastaus : ${​​​​​​vastaukset}​​​​​​">
+			<td th:text="${​​​​​​vastaus.radiovast}​​​​​​">Vastaus</td>
+		</tr>
+	</table>
+</body>
+
+</html>
