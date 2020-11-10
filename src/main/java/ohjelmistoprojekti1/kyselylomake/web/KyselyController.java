@@ -40,4 +40,7 @@ public class KyselyController {
 		    public @ResponseBody Kysymys saveKysRest(@RequestBody Kysymys kysymys) {	
 		    	return kysrepository.save(kysymys);
 		    }
+		    
+		       
+		  
 }

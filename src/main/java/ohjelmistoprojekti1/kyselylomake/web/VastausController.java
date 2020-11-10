@@ -55,10 +55,12 @@ public class VastausController {
 		return vastausRepository.save(vastaus);
 	}
 	
-	@RequestMapping(value = "/vastaus", method = RequestMethod.GET)
-	public String showVastaukset(Model model) {
-		model.addAttribute("vastaukset", vastausRepository.findAll());
-		return "vastaus";
-	}
+//	@RequestMapping(value = "/vastauslista", method = RequestMethod.GET)
+//	public String showVastaukset(Model model) {
+//		List<Vastaus> vastaukset = (List<Vastaus>) vastausRepository.findAll();
+//		System.out.println(vastaukset);
+//		model.addAttribute("vastaukset", vastaukset);
+//		return "vastaus";
+//	}
 
 }
