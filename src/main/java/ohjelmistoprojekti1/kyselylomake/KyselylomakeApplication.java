@@ -28,8 +28,10 @@ public class KyselylomakeApplication {
 		return (args) -> {
 			log.info("Tallenna kysymyksiä");
 			Kysymys k1 = new Kysymys("Mikä on sukupuolesi?");
+			Kysymys k2 = new Kysymys("Mitä teet vapaa-ajallasi?");
 			
       		krepository.save(k1);
+      		krepository.save(k2);
 			
 			 Vastaus v1 = new Vastaus("Mies", k1);
 			 Vastaus v2 = new Vastaus("Nainen", k1);
@@ -42,6 +44,11 @@ public class KyselylomakeApplication {
 			log.info("fetch kysymykset");
 			for (Kysymys kysymys : krepository.findAll()) {
 				log.info(kysymys.toString());
+			}
+			
+			log.info("fetch vastaukset");
+			for (Vastaus vastaus : vrepository.findAll()) {
+				log.info(vastaus.toString());
 			}
 			
 			
