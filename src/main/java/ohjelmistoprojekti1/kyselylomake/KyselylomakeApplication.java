@@ -44,6 +44,11 @@ public class KyselylomakeApplication {
 				log.info(kysymys.toString());
 			}
 			
+			log.info("fetch vastaukset");
+			for (Vastaus vastaus : vrepository.findAll()) {
+				log.info(vastaus.toString());
+			}
+			
 			
 		};
 	}

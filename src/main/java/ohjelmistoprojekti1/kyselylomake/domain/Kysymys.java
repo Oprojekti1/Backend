@@ -24,12 +24,14 @@ private String radiokys;
 @OneToMany(cascade = CascadeType.ALL, mappedBy = "kysymys")
 private List<Vastaus> vastaukset;
 
-public Kysymys () {
-	super();
-	this.kysid = null;
-	this.radiokys = null;
+public Kysymys() {} //lisätty RL
 
-}
+//public Kysymys () {
+//	super();
+//	this.kysid = null;
+//	this.radiokys = null;
+//
+//}
 
 public Kysymys (String radiokys) {
 	super();
