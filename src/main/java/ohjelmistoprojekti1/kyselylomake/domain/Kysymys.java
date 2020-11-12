@@ -11,20 +11,19 @@ import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
-
-
 @Entity
 public class Kysymys {
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
-private Long kysid;
-private String radiokys;
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private Long kysid;
+	private String radiokys;
+	
+	@JsonManagedReference
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "kysymys")
+	private List<Vastaus> vastaukset;
 
-@JsonManagedReference
-@OneToMany(cascade = CascadeType.ALL, mappedBy = "kysymys")
-private List<Vastaus> vastaukset;
-
-public Kysymys() {} //lisätty RL
+	public Kysymys() {
+	} // lisätty RL
 
 //public Kysymys () {
 //	super();
@@ -33,51 +32,45 @@ public Kysymys() {} //lisätty RL
 //
 //}
 
-public Kysymys (String radiokys) {
-	super();
-	this.radiokys = radiokys;
-	
-	
-}
+	public Kysymys(String radiokys) {
+		super();
+		this.radiokys = radiokys;
 
-public Kysymys (Long kysid, String radiokys) {
-	this.kysid = kysid;
-	this.radiokys = radiokys;
-	
-}
+	}
 
-public Long getKysid() {
-	return kysid;
-}
+	public Kysymys(Long kysid, String radiokys) {
+		this.kysid = kysid;
+		this.radiokys = radiokys;
 
-public void setKysid(Long kysid) {
-	this.kysid = kysid;
-}
+	}
 
-public String getRadiokys() {
-	return radiokys;
-}
+	public Long getKysid() {
+		return kysid;
+	}
 
-public void setRadiokys(String radiokys) {
-	this.radiokys = radiokys;
-}
+	public void setKysid(Long kysid) {
+		this.kysid = kysid;
+	}
 
+	public String getRadiokys() {
+		return radiokys;
+	}
 
+	public void setRadiokys(String radiokys) {
+		this.radiokys = radiokys;
+	}
 
-public List<Vastaus> getVastaukset() {
-	return vastaukset;
-}
+	public List<Vastaus> getVastaukset() {
+		return vastaukset;
+	}
 
-public void setVastaukset(List<Vastaus> vastaukset) {
-	this.vastaukset = vastaukset;
-}
+	public void setVastaukset(List<Vastaus> vastaukset) {
+		this.vastaukset = vastaukset;
+	}
 
-@Override
-public String toString() {
-	return "Kysymys [kysid=" + kysid + ", radiokys=" + radiokys + "]";
-}
-
-
-
+	@Override
+	public String toString() {
+		return "Kysymys [kysid=" + kysid + ", radiokys=" + radiokys + "]";
+	}
 
 }
