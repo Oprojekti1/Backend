@@ -9,6 +9,8 @@ import org.springframework.context.annotation.Bean;
 
 import ohjelmistoprojekti1.kyselylomake.domain.Kysymys;
 import ohjelmistoprojekti1.kyselylomake.domain.KysymysRepository;
+import ohjelmistoprojekti1.kyselylomake.domain.Vaihtoehto;
+import ohjelmistoprojekti1.kyselylomake.domain.VaihtoehtoRepository;
 import ohjelmistoprojekti1.kyselylomake.domain.Vastaus;
 import ohjelmistoprojekti1.kyselylomake.domain.VastausRepository;
 
@@ -24,7 +26,7 @@ public class KyselylomakeApplication {
 	}
 	
 	 @Bean
-	public CommandLineRunner demo(KysymysRepository krepository, VastausRepository vastausRepository) {
+	public CommandLineRunner demo(KysymysRepository krepository, VastausRepository vastausRepository, VaihtoehtoRepository veRepository) {
 		return (args) -> {
 			log.info("Tallenna kysymyksiä");
 			Kysymys k1 = new Kysymys("Mikä on sukupuolesi?");
@@ -38,6 +40,15 @@ public class KyselylomakeApplication {
 			vastausRepository.save(v1);
 			vastausRepository.save(v2);
      		vastausRepository.save(v3);
+     		
+     		Vaihtoehto ve1 = new Vaihtoehto("Mies", k1);
+     		Vaihtoehto ve2 = new Vaihtoehto("Nainen", k1);
+     		Vaihtoehto ve3 = new Vaihtoehto("Muu", k1);
+     		
+     		veRepository.save(ve1);
+     		veRepository.save(ve2);
+     		veRepository.save(ve3);
+     		
 			
 			log.info("fetch kysymykset");
 			for (Kysymys kysymys : krepository.findAll()) {
@@ -47,6 +58,11 @@ public class KyselylomakeApplication {
 			log.info("fetch vastaukset");
 			for (Vastaus vastaus : vastausRepository.findAll()) {
 				log.info(vastaus.toString());
+			}
+			
+			log.info("fetch vaihtoehdot");
+			for (Vaihtoehto vaihtoehto : veRepository.findAll()) {
+				log.info(vaihtoehto.toString());
 			}
 			
 			
