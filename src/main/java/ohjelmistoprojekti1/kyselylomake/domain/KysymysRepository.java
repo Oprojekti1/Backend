@@ -5,7 +5,9 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface KysymysRepository extends CrudRepository<Kysymys, Long> {
-	Kysymys findByradiokys(String radiokys);
+	Kysymys findBykys(String kys);
 	Kysymys findByKysid(Long kysid);//tämä lisätty
+	Kysymys findBykystyp(String kystyp);
+	
 
 }

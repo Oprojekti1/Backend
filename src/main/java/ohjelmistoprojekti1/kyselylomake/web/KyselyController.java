@@ -12,35 +12,50 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-
+import ohjelmistoprojekti1.kyselylomake.domain.Kysely;
+import ohjelmistoprojekti1.kyselylomake.domain.KyselyRepository;
 import ohjelmistoprojekti1.kyselylomake.domain.Kysymys;
 import ohjelmistoprojekti1.kyselylomake.domain.KysymysRepository;
 
 @CrossOrigin
 @Controller
 public class KyselyController {
-       @Autowired
-       private KysymysRepository kysrepository;
-       
-       
-     //Restful service to get all the questions
-		 @RequestMapping(value="/kysymykset", method = RequestMethod.GET)
-		    public @ResponseBody List<Kysymys> kysListRest() {	
-		        return (List<Kysymys>) kysrepository.findAll();
-		    }  
-		 
-		// Restful service to get question by id
-		    @RequestMapping(value="/kysymykset/{kysid}", method = RequestMethod.GET)
-		    public @ResponseBody Optional<Kysymys> findKysRest(@PathVariable("kysid") Long kysid) {	
-		    	return kysrepository.findById(kysid);
-		    }   
-		    
-		 // Restful service to save a new question
-		    @RequestMapping(value="/kysymykset", method = RequestMethod.POST)
-		    public @ResponseBody Kysymys saveKysRest(@RequestBody Kysymys kysymys) {	
-		    	return kysrepository.save(kysymys);
-		    }
-		    
-		       
-		  
+	@Autowired
+	private KysymysRepository kysrepository;
+
+	@Autowired
+	private KyselyRepository kyselyRepository;
+
+	// Restful service to get all the questions
+	@RequestMapping(value = "/kysymykset", method = RequestMethod.GET)
+	public @ResponseBody List<Kysymys> kysListRest() {
+		return (List<Kysymys>) kysrepository.findAll();
+	}
+
+	// Restful service to get question by id
+	@RequestMapping(value = "/kysymykset/{kysid}", method = RequestMethod.GET)
+	public @ResponseBody Optional<Kysymys> findKysRest(@PathVariable("kysid") Long kysid) {
+		return kysrepository.findById(kysid);
+	}
+
+	// Restful service to save a new question
+	@RequestMapping(value = "/kysymykset", method = RequestMethod.POST)
+	public @ResponseBody Kysymys saveKysRest(@RequestBody Kysymys kysymys) {
+		return kysrepository.save(kysymys);
+	}
+
+	// Restful service haetaan kysely
+	@RequestMapping(value = "/kyselyt", method = RequestMethod.GET)
+	public @ResponseBody List<Kysely> kyselyListRest() {
+		return (List<Kysely>) kyselyRepository.findAll();
+	}
+	
+	@RequestMapping(value = "/kyselyt/{kyselyId}", method = RequestMethod.GET)
+	public @ResponseBody Optional<Kysely> findKyselyRest(@PathVariable("kyselyId") Long kyselyId){
+		
+		System.out.println( kyselyRepository.findById(kyselyId));
+		return  kyselyRepository.findById(kyselyId);
+	
+	}
+
 }

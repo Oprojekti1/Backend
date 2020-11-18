@@ -7,6 +7,8 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
+import ohjelmistoprojekti1.kyselylomake.domain.Kysely;
+import ohjelmistoprojekti1.kyselylomake.domain.KyselyRepository;
 import ohjelmistoprojekti1.kyselylomake.domain.Kysymys;
 import ohjelmistoprojekti1.kyselylomake.domain.KysymysRepository;
 import ohjelmistoprojekti1.kyselylomake.domain.Vaihtoehto;
@@ -26,20 +28,32 @@ public class KyselylomakeApplication {
 	}
 	
 	 @Bean
-	public CommandLineRunner demo(KysymysRepository krepository, VastausRepository vastausRepository, VaihtoehtoRepository veRepository) {
+	public CommandLineRunner demo(KysymysRepository krepository, VastausRepository vastausRepository, VaihtoehtoRepository veRepository, KyselyRepository kyselyRepository) {
 		return (args) -> {
-			log.info("Tallenna kysymyksiä");
-			Kysymys k1 = new Kysymys("Mikä on sukupuolesi?");
 			
+			log.info("Tallenna kysely");
+			
+			Kysely kysely = new Kysely("Ensinmmäinen");
+			kyselyRepository.save(kysely);
+			
+			log.info("Tallenna kysymyksiä");
+
+			Kysymys k1 = new Kysymys("Mikä on sukupuolesi?", "Radio", kysely);
+	Kysymys k2 = new Kysymys("Mitä teet vapaa-ajallasi", "Avoin teksti", kysely);			
+			krepository.save(k2);
       		krepository.save(k1);
 			
+      		
+      		
 			 Vastaus v1 = new Vastaus("Mies", k1);
 			 Vastaus v2 = new Vastaus("Nainen", k1);
 			Vastaus v3 = new Vastaus("Muu", k1);
+			Vastaus v4 = new Vastaus(" ", k2);
 			
 			vastausRepository.save(v1);
 			vastausRepository.save(v2);
      		vastausRepository.save(v3);
+  		vastausRepository.save(v4);
      		
      		Vaihtoehto ve1 = new Vaihtoehto("Mies", k1);
      		Vaihtoehto ve2 = new Vaihtoehto("Nainen", k1);
@@ -65,6 +79,10 @@ public class KyselylomakeApplication {
 				log.info(vaihtoehto.toString());
 			}
 			
+			log.info("fetch kysely");
+			for (Kysely kysely1: kyselyRepository.findAll()) {
+				log.info(kysely1.toString());
+			}
 			
 		};
 	}

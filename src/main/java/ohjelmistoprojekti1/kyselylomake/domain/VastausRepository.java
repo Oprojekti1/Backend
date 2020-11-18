@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface VastausRepository extends CrudRepository<Vastaus, Long> {
-Vastaus findByradiovast(String radiovast);
+Vastaus findByvast(String vast);
 Vastaus findByVastid(Long vastid);//tämä lisätty
 
 
