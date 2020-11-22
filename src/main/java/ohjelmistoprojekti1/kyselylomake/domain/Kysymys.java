@@ -7,24 +7,36 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-
-
 
 @Entity
 public class Kysymys {
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
-private Long kysid;
-private String radiokys;
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private Long kysid;
+	private String kys;
+	private String kystyp;
+	
+	@JsonManagedReference
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "kysymys")
+	private List<Vastaus> vastaukset;
+	
+	@JsonManagedReference
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "kysymys")
+	private List<Vaihtoehto> vaihtoehdot;
+	
+	@JsonBackReference
+	@ManyToOne
+	@JoinColumn(name = "kyselyId")
+	private Kysely kysely;
 
-@JsonManagedReference
-@OneToMany(cascade = CascadeType.ALL, mappedBy = "kysymys")
-private List<Vastaus> vastaukset;
-
-public Kysymys() {} //lisätty RL
+	public Kysymys() {
+	} // lisätty RL
 
 //public Kysymys () {
 //	super();
@@ -32,51 +44,92 @@ public Kysymys() {} //lisätty RL
 //	this.radiokys = null;
 //
 //}
+//
+//	public Kysymys(String radiokys) {
+//		super();
+//		this.radiokys = radiokys;
+//
+//	}
+//
+//	public Kysymys(Long kysid, String radiokys) {
+//		this.kysid = kysid;
+//		this.radiokys = radiokys;
+//
+//	}
 
-public Kysymys (String radiokys) {
+
+	public Kysymys(Long kysid, String kys, String kystyp, Kysely kysely) {
 	super();
-	this.radiokys = radiokys;
-	
-	
-}
-
-public Kysymys (Long kysid, String radiokys) {
 	this.kysid = kysid;
-	this.radiokys = radiokys;
+	this.kys = kys;
+	this.kystyp = kystyp;
+	this.kysely = kysely;
+}
+
+	public Kysymys(String kys, String kystyp, Kysely kysely) {
+	super();
+	this.kys = kys;
+	this.kystyp = kystyp;
+	this.kysely = kysely;
+}
+
+	public Long getKysid() {
+		return kysid;
+	}
+	public void setKysid(Long kysid) {
+		this.kysid = kysid;
+	}
+
 	
-}
 
-public Long getKysid() {
-	return kysid;
-}
+	public String getKys() {
+		return kys;
+	}
 
-public void setKysid(Long kysid) {
-	this.kysid = kysid;
-}
+	public void setKys(String kys) {
+		this.kys = kys;
+	}
 
-public String getRadiokys() {
-	return radiokys;
-}
+	public String getKystyp() {
+		return kystyp;
+	}
+	
+	
 
-public void setRadiokys(String radiokys) {
-	this.radiokys = radiokys;
-}
+	public Kysely getKysely() {
+		return kysely;
+	}
 
+	public void setKysely(Kysely kysely) {
+		this.kysely = kysely;
+	}
 
+	public void setKystyp(String kystyp) {
+		this.kystyp = kystyp;
+	}
 
-public List<Vastaus> getVastaukset() {
-	return vastaukset;
-}
+	public List<Vastaus> getVastaukset() {
+		return vastaukset;
+	}
 
-public void setVastaukset(List<Vastaus> vastaukset) {
-	this.vastaukset = vastaukset;
-}
+	public void setVastaukset(List<Vastaus> vastaukset) {
+		this.vastaukset = vastaukset;
+	}
+	
+	
 
-@Override
-public String toString() {
-	return "Kysymys [kysid=" + kysid + ", radiokys=" + radiokys + "]";
-}
+	public List<Vaihtoehto> getVaihtoehdot() {
+		return vaihtoehdot;
+	}
 
+	public void setVaihtoehdot(List<Vaihtoehto> vaihtoehdot) {
+		this.vaihtoehdot = vaihtoehdot;
+	}
+
+	@Override
+	public String toString() {
+		return "Kysymys [kysid=" + kysid + ", kys=" + kys + ", kystyp=" + kystyp + ", kysely=" + this.getKysely() +  "]";
+	}
 
 
 

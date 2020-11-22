@@ -1,0 +1,21 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+
+<body>
+<table>
+		<tr>
+			<th>Vastaus id</th>
+			<th>Vastaukset</th>
+			
+		</tr>
+		<tr th:each="vastaus : ${vastaukset}" >
+			<td th:text="${vastaus.vastid}">id</td>
+				<td th:text="${vastaus.vast}">vastaus</td>
+		</tr>
+	</table>
+</body>
+
+</html>

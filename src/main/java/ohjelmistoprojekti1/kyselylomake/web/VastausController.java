@@ -5,12 +5,15 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
+
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+
 
 import ohjelmistoprojekti1.kyselylomake.domain.Kysymys;
 import ohjelmistoprojekti1.kyselylomake.domain.KysymysRepository;
@@ -19,6 +22,7 @@ import ohjelmistoprojekti1.kyselylomake.domain.VastausRepository;
 
 @CrossOrigin
 @Controller
+
 public class VastausController {
 
 	@Autowired
@@ -46,7 +50,17 @@ public class VastausController {
 		//vastausRepository.save(vastaus);
 		// vastaus = vastausRepository.findByVastid(kysid);
 		Kysymys kysymys = kysrepository.findByKysid(kysid);
+//		Vastaus vastaus = vastausRepository.findByVastid(vastid);
 		vastaus.setKysymys(kysymys);
 		return vastausRepository.save(vastaus);
 	}
+	
+//	@RequestMapping(value = "/vastauslista", method = RequestMethod.GET)
+//	public String showVastaukset(Model model) {
+//		List<Vastaus> vastaukset = (List<Vastaus>) vastausRepository.findAll();
+//		System.out.println(vastaukset);
+//		model.addAttribute("vastaukset", vastaukset);
+//		return "vastaus";
+//	}
+
 }

@@ -10,54 +10,73 @@ import javax.persistence.ManyToOne;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
 @Entity
-public class Vastaus {
+public class Vaihtoehto {
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Long vastid;
-	private String vast;
-
+	private Long veId;
+	private String vaihtoehto;
+	
 	@JsonBackReference
 	@ManyToOne
 	@JoinColumn(name = "kysid")
 	private Kysymys kysymys;
-
-	public Vastaus() {
+	
+	
+	public Vaihtoehto(Long veId, String vaihtoehto) {
 		super();
+		this.veId = veId;
+		this.vaihtoehto = vaihtoehto;
 	}
 
-	public Vastaus(String vast, Kysymys kysymys) {
+
+	public Vaihtoehto() {
 		super();
-		this.vast = vast;
+	
+	}
+
+
+	public Vaihtoehto(String vaihtoehto, Kysymys kysymys) {
+		super();
+		this.vaihtoehto = vaihtoehto;
 		this.kysymys = kysymys;
 	}
 
-	public Long getVastid() {
-		return vastid;
+
+	public Long getVeId() {
+		return veId;
 	}
 
-	public void setVastid(Long vastid) {
-		this.vastid = vastid;
+
+	public void setVeId(Long veId) {
+		this.veId = veId;
 	}
 
-	public String getVast() {
-		return vast;
+
+	public String getVaihtoehto() {
+		return vaihtoehto;
 	}
 
-	public void setVast(String vast) {
-		this.vast = vast;
+
+	public void setVaihtoehto(String vaihtoehto) {
+		this.vaihtoehto = vaihtoehto;
 	}
+
 
 	public Kysymys getKysymys() {
 		return kysymys;
 	}
 
+
 	public void setKysymys(Kysymys kysymys) {
 		this.kysymys = kysymys;
 	}
 
+	
+
 	@Override
 	public String toString() {
-		return "Vastaus [vastid=" + vastid + ", vast=" + vast + ", kysymys=" + this.getKysymys() + "]";
+		return "Vaihtoehto [veId=" + veId + ", vaihtoehto=" + vaihtoehto + ", kysymys=" + this.getKysymys() + "]";
 	}
-
+	
 }
