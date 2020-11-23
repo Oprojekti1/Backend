@@ -81,7 +81,7 @@ public class KyselyController {
 	@RequestMapping(value = "/save", method = RequestMethod.POST)
 	public String save(Kysely kysely) {
 		kyselyRepository.save(kysely);
-		return "redirect:kysely";
+		return "redirect:/kysely";
 	}
 	
 	@RequestMapping(value = "/addkysymys/{id}", method = RequestMethod.GET)
@@ -99,7 +99,7 @@ public class KyselyController {
 	public String saveKysymys(@ModelAttribute Kysymys kysymys, Model model) {
 		model.addAttribute("kysymys", kysymys);
 		model.addAttribute("vaihtoehdot", vrepository.findAll());
-		return "addkysymys";
+		return "redirect:/kysely";
 	}
 
 }

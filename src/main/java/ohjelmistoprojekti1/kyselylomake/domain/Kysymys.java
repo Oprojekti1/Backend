@@ -20,7 +20,8 @@ public class Kysymys {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long kysid;
 	private String kys;
-	private String kystyp;
+	// private String kystyp;
+	private Kysymystyyppi kysymystyyppi;
 	
 	@JsonManagedReference
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "kysymys")
@@ -56,20 +57,25 @@ public class Kysymys {
 //		this.radiokys = radiokys;
 //
 //	}
+	
+	public enum Kysymystyyppi {
+		radiokysymys,
+		avoin
+	}
 
 
-	public Kysymys(Long kysid, String kys, String kystyp, Kysely kysely) {
+	public Kysymys(Long kysid, String kys, Kysymystyyppi kysymystyyppi, Kysely kysely) {
 	super();
 	this.kysid = kysid;
 	this.kys = kys;
-	this.kystyp = kystyp;
+	this.kysymystyyppi = kysymystyyppi;
 	this.kysely = kysely;
 }
 
-	public Kysymys(String kys, String kystyp, Kysely kysely) {
+	public Kysymys(String kys, Kysymystyyppi kysymystyyppi, Kysely kysely) {
 	super();
 	this.kys = kys;
-	this.kystyp = kystyp;
+	this.kysymystyyppi = kysymystyyppi;
 	this.kysely = kysely;
 }
 
@@ -90,12 +96,7 @@ public class Kysymys {
 		this.kys = kys;
 	}
 
-	public String getKystyp() {
-		return kystyp;
-	}
 	
-	
-
 	public Kysely getKysely() {
 		return kysely;
 	}
@@ -104,9 +105,7 @@ public class Kysymys {
 		this.kysely = kysely;
 	}
 
-	public void setKystyp(String kystyp) {
-		this.kystyp = kystyp;
-	}
+	
 
 	public List<Vastaus> getVastaukset() {
 		return vastaukset;
@@ -125,11 +124,27 @@ public class Kysymys {
 	public void setVaihtoehdot(List<Vaihtoehto> vaihtoehdot) {
 		this.vaihtoehdot = vaihtoehdot;
 	}
+	
+	public Kysymystyyppi getKysymystyyppi() {
+		return kysymystyyppi;
+	}
+	
+	public void setKysymystyyppi(Kysymystyyppi kysymystyyppi) {
+		this.kysymystyyppi = kysymystyyppi;
+	}
 
 	@Override
 	public String toString() {
-		return "Kysymys [kysid=" + kysid + ", kys=" + kys + ", kystyp=" + kystyp + ", kysely=" + this.getKysely() +  "]";
+		if (this.vaihtoehdot != null)
+		return "Kysymys [kysid=" + kysid + ", kys=" + kys + ", kysymystyyppi=" + kysymystyyppi + ", kysely=" + this.getKysely() +
+				", vaihtoehdot =" + this.getVaihtoehdot() + "]"; 
+		else		
+		return "Kysymys [kysid=" + kysid + ", kys=" + kys + ", kysymystyyppi=" + kysymystyyppi + ", kysely=" + this.getKysely() +  "]" 
+				;
 	}
+
+	
+	
 
 
 

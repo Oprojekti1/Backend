@@ -11,8 +11,13 @@
 	    <input type="hidden" th:field="*{kysely}" />
 	    <label for="kysymys">Kysymys</label>
 	    <input type="text" id="kysymys" th:field="*{kys}" class="form-control"/>
-	    <label th:text="${kysely} ? ${kysely.kystyp} : ''">Kysymystyyppi</label>
-	    <input type="text" id="kysymystyp" th:field="*{kystyp}" class="form-control"/> 
+	    <label>Kysymystyyppi: </label><br>
+        <select th:field="*{kysymystyyppi}">
+
+         <option th:each="kysymystyyppi: ${T(ohjelmistoprojekti1.kyselylomake.domain.Kysymys.Kysymystyyppi).values()}" th:value="${kysymystyyppi}" th:text="${kysymystyyppi}"></option>
+       </select> 
+       <label for="vaihtoehdot">Vaihtoehdot</label>
+	    <input type="text" id="vaihtoehdot" th:field="${vaihtoehto.vaihtoehto}" class="form-control"/>
 	    
 	    <input type="submit" value="Save"></input>
 	</form>

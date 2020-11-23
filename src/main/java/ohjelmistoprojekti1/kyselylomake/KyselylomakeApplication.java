@@ -10,6 +10,7 @@ import org.springframework.context.annotation.Bean;
 import ohjelmistoprojekti1.kyselylomake.domain.Kysely;
 import ohjelmistoprojekti1.kyselylomake.domain.KyselyRepository;
 import ohjelmistoprojekti1.kyselylomake.domain.Kysymys;
+import ohjelmistoprojekti1.kyselylomake.domain.Kysymys.Kysymystyyppi;
 import ohjelmistoprojekti1.kyselylomake.domain.KysymysRepository;
 import ohjelmistoprojekti1.kyselylomake.domain.User;
 import ohjelmistoprojekti1.kyselylomake.domain.UserRepository;
@@ -41,8 +42,8 @@ public class KyselylomakeApplication {
 			
 			log.info("Tallenna kysymyksiä");
 
-			Kysymys k1 = new Kysymys("Mikä on sukupuolesi?", "Radio", kysely);
-	Kysymys k2 = new Kysymys("Mitä teet vapaa-ajallasi", "Avoin teksti", kysely);			
+			Kysymys k1 = new Kysymys("Mikä on sukupuolesi?", Kysymystyyppi.radiokysymys, kysely);
+	        Kysymys k2 = new Kysymys("Mitä teet vapaa-ajallasi", Kysymystyyppi.avoin, kysely);			
 			krepository.save(k2);
       		krepository.save(k1);
 			
