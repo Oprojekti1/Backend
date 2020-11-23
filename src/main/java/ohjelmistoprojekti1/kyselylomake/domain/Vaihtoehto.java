@@ -15,7 +15,7 @@ public class Vaihtoehto {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long veId;
-	private String vaihtoehto;
+	private String vaihtoehtoja;
 	
 	@JsonBackReference
 	@ManyToOne
@@ -23,10 +23,10 @@ public class Vaihtoehto {
 	private Kysymys kysymys;
 	
 	
-	public Vaihtoehto(Long veId, String vaihtoehto) {
+	public Vaihtoehto(Long veId, String vaihtoehtoja) {
 		super();
 		this.veId = veId;
-		this.vaihtoehto = vaihtoehto;
+		this.vaihtoehtoja= vaihtoehtoja;
 	}
 
 
@@ -36,9 +36,9 @@ public class Vaihtoehto {
 	}
 
 
-	public Vaihtoehto(String vaihtoehto, Kysymys kysymys) {
+	public Vaihtoehto(String vaihtoehtoja, Kysymys kysymys) {
 		super();
-		this.vaihtoehto = vaihtoehto;
+		this.vaihtoehtoja = vaihtoehtoja;
 		this.kysymys = kysymys;
 	}
 
@@ -53,13 +53,13 @@ public class Vaihtoehto {
 	}
 
 
-	public String getVaihtoehto() {
-		return vaihtoehto;
+	public String getVaihtoehtoja() {
+		return vaihtoehtoja;
 	}
 
 
-	public void setVaihtoehto(String vaihtoehto) {
-		this.vaihtoehto = vaihtoehto;
+	public void setVaihtoehtoja(String vaihtoehtoja) {
+		this.vaihtoehtoja = vaihtoehtoja;
 	}
 
 
@@ -76,7 +76,7 @@ public class Vaihtoehto {
 
 	@Override
 	public String toString() {
-		return "Vaihtoehto [veId=" + veId + ", vaihtoehto=" + vaihtoehto + ", kysymys=" + this.getKysymys() + "]";
+		return "Vaihtoehto [veId=" + veId + ", vaihtoehtoja=" + vaihtoehtoja + ", kysymys=" + this.getKysymys() + "]";
 	}
 	
 }

@@ -1,0 +1,38 @@
+  
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+<title>Kysymykset</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+
+</head>
+<body>
+
+
+		<h1>Lista Kysymyksistä</h1>
+
+	<table>
+		<tr>
+			<th>Id</th>
+			<th>Kysymys</th>
+			<th>Kysymystyyppi</th>
+			<th>Vaihtoehdot</th>
+				<th>Lisää vaihtoehto</th>
+		</tr>
+		<tr th:each="kysymys : ${kysymykset}">
+			<td th:text="${kysymys.kysid}">Id</td>
+			<td th:text="${kysymys.kys}">Nimi</td>
+			<td th:text="${kysymys.kysymystyyppi}">Kuvaus</td>
+				<td><a th:href="@{/vaihtikset/{id}(id=${kysymys.kysid})}">Näytä
+					Vaihtoehdot</a>
+			<td><a th:href="@{/addvaihto/{id}(id=${kysymys.kysid})}">Lisää
+					Vaihtoehto</a>
+<!-- 				<td th:text="${kysymys.vaihtoehdot.vaihtoehdot}">Kuvaus</td> -->
+		</tr>
+	</table>
+</body>
+</html>

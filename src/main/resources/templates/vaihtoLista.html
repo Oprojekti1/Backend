@@ -1,0 +1,31 @@
+  
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+<title>Vaihtoehdot</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+
+</head>
+<body>
+
+
+		<h1>Lista vaihtoehdoista</h1>
+
+	<table>
+		<tr>
+			<th>Id</th>
+			<th>Vaihtoehto</th>
+			
+		</tr>
+		<tr th:each="vaihtoehto : ${vaihdot}">
+			<td th:text="${vaihtoehto.veId}">Id</td>
+			<td th:text="${vaihtoehto.vaihtoehtoja}">Nimi</td>
+	
+		</tr>
+	</table>
+</body>
+</html>

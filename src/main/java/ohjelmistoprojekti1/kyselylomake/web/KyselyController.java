@@ -18,6 +18,7 @@ import ohjelmistoprojekti1.kyselylomake.domain.Kysely;
 import ohjelmistoprojekti1.kyselylomake.domain.KyselyRepository;
 import ohjelmistoprojekti1.kyselylomake.domain.Kysymys;
 import ohjelmistoprojekti1.kyselylomake.domain.KysymysRepository;
+import ohjelmistoprojekti1.kyselylomake.domain.Vaihtoehto;
 import ohjelmistoprojekti1.kyselylomake.domain.VaihtoehtoRepository;
 
 @CrossOrigin
@@ -64,6 +65,9 @@ public class KyselyController {
 	
 	}
 	
+	
+	// ThymeLeaf enpointit
+	
 	@RequestMapping("/kysely")
 	public String KyselyLista(Model model) {
 	     model.addAttribute("kyselyt", kyselyRepository.findAll());
@@ -85,21 +89,43 @@ public class KyselyController {
 	}
 	
 	@RequestMapping(value = "/addkysymys/{id}", method = RequestMethod.GET)
-	public String addKysymys(@PathVariable("id") Long kyselyId, Model model) {
+	public String addKysymys(@PathVariable("id") Long kyselyId,  Model model) {
 		Kysely kysely = kyselyRepository.findById(kyselyId).get();
 		Kysymys kysymys = new Kysymys();
 		kysymys.setKysely(kysely);
 		model.addAttribute("kysymys", kysymys);
-		model.addAttribute("vaihtoehdot", vrepository.findAll());
+	
+	//	model.addAttribute("vaihtoehdot", vrepository.findAll());
 		return "addkysymys";
 		
 	}
 	
 	@RequestMapping(value= "/savekysymys", method = RequestMethod.POST)
 	public String saveKysymys(@ModelAttribute Kysymys kysymys, Model model) {
-		model.addAttribute("kysymys", kysymys);
-		model.addAttribute("vaihtoehdot", vrepository.findAll());
-		return "redirect:/kysely";
+		kysrepository.save(kysymys);
+		
+//		model.addAttribute("kyselyt", kyselyRepository.findAll());
+	//	model.addAttribute("vaihtoehdot", vrepository.findAll());
+		return "redirect:kysely";
 	}
 
-}
+	@RequestMapping(value = "/questions/{id}", method = RequestMethod.GET)
+	public String kyssarit(@PathVariable("id") Long kyselyId,  Model model) {
+		Kysely kysely = kyselyRepository.findById(kyselyId).get();
+
+		List<Kysymys> kysymykset = kysely.getKysymykset();
+	
+		model.addAttribute("kysymykset", kysymykset);
+	
+	//	model.addAttribute("vaihtoehdot", vrepository.findAll());
+		return "kysymyksetLista";
+		
+	}
+	//public String quePage(Model model) {
+	//	List<Kysymys> kysymykset = (List<Kysymys>) kysrepository.findAll();
+	//	model.addAttribute("kysymykset", kysymykset);
+	//	model.addAttribute("vaihtoehdot", vrepository.findAll());
+	//	return "kysymyksetLista";
+	}
+
+

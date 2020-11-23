@@ -29,10 +29,13 @@ public class WebSecurityKyselylomake extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
         .authorizeRequests()
+        .and().authorizeRequests().antMatchers("/h2-console/**").permitAll()
+		.and().csrf().ignoringAntMatchers("/h2-console/**")
+		.and()
        // .antMatchers("").permitAll() 
       //  .antMatchers("").hasAuthority("ADMIN")
-        .anyRequest().authenticated()
-        .and()
+      //  .anyRequest().authenticated()
+      //  .and()
       .formLogin()
          // .loginPage("/login")
          // .defaultSuccessUrl("", true)

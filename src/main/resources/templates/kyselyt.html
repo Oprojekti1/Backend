@@ -7,36 +7,22 @@
 
 </head>
 <body>
-    
+
 	<h1>Kyselyt</h1>
-	
-	
-	
-	
-	
-	
 
 	<table>
-	<tr>
-	<th> Nimi </th>
-	
-	
-	</tr>
-	
-	
-	
-	     
-	          <tr th:each = "kysely : ${kyselyt}">
-	          <td th:text="${kysely.nimi}">Nimi</td>
-	         
-	          <td><a th:href="@{/addkysymys/{id}(id=${kysely.kyselyId})}">Lisää
-	          kysymys</a>
-	          </tr>
-	     
-	     
+		<tr>
+			<th>Nimi</th>
+		</tr>
+		<tr th:each="kysely : ${kyselyt}">
+			<td th:text="${kysely.nimi}">Nimi</td>
+			<td><a th:href="@{/addkysymys/{id}(id=${kysely.kyselyId})}">Lisää
+					kysymys</a>
+			<td><a th:href="@{/questions/{id}(id=${kysely.kyselyId})}">Kysymykset</a>
+		</tr>
 	</table>
-	<a href="/add" >Lisää kysely</a>
-	
-	
+	<a href="/add">Lisää kysely</a>
+
+
 </body>
 </html>

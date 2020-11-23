@@ -135,13 +135,21 @@ public class Kysymys {
 
 	@Override
 	public String toString() {
-		if (this.vaihtoehdot != null)
-		return "Kysymys [kysid=" + kysid + ", kys=" + kys + ", kysymystyyppi=" + kysymystyyppi + ", kysely=" + this.getKysely() +
-				", vaihtoehdot =" + this.getVaihtoehdot() + "]"; 
-		else		
-		return "Kysymys [kysid=" + kysid + ", kys=" + kys + ", kysymystyyppi=" + kysymystyyppi + ", kysely=" + this.getKysely() +  "]" 
-				;
+		return "Kysymys [kysid=" + kysid + ", kys=" + kys + ", kysymystyyppi=" + kysymystyyppi +  ", kysely=" + this.getKysely() + "]";
 	}
+	
+	
+
+//	@Override
+//	public String toString() {
+//		if (this.vaihtoehdot != null) {
+//		return "Kysymys [kysid=" + kysid + ", kys=" + kys + ", kysymystyyppi=" + kysymystyyppi + ", kysely=" + this.getKysely() + 
+//				", vaihtoehdot =" + this.getVaihtoehdot() + "]";
+//	}else {
+//		return "Kysymys [kysid=" + kysid + ", kys=" + kys + ", kysymystyyppi=" + kysymystyyppi + ", kysely=" + this.getKysely() + "]";
+//	}
+//	}
+
 
 	
 	
