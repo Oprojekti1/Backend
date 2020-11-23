@@ -1,0 +1,20 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Kyselyt</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+	<h2>Lisää kysely</h2>
+	
+	<form th:object="${kysely}" th:action="@{save}" action="#" method="post">
+	    <label for="nimi">Nimi</label>
+	    <input type="text" id="title" th:field="*{nimi}" class="form-control"/>
+	    <input type="submit" value="Save"></input>
+	</form>
+	
+	
+
+
+</body>
+</html>

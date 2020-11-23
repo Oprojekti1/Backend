@@ -11,6 +11,8 @@ import ohjelmistoprojekti1.kyselylomake.domain.Kysely;
 import ohjelmistoprojekti1.kyselylomake.domain.KyselyRepository;
 import ohjelmistoprojekti1.kyselylomake.domain.Kysymys;
 import ohjelmistoprojekti1.kyselylomake.domain.KysymysRepository;
+import ohjelmistoprojekti1.kyselylomake.domain.User;
+import ohjelmistoprojekti1.kyselylomake.domain.UserRepository;
 import ohjelmistoprojekti1.kyselylomake.domain.Vaihtoehto;
 import ohjelmistoprojekti1.kyselylomake.domain.VaihtoehtoRepository;
 import ohjelmistoprojekti1.kyselylomake.domain.Vastaus;
@@ -28,7 +30,8 @@ public class KyselylomakeApplication {
 	}
 	
 	 @Bean
-	public CommandLineRunner demo(KysymysRepository krepository, VastausRepository vastausRepository, VaihtoehtoRepository veRepository, KyselyRepository kyselyRepository) {
+	public CommandLineRunner demo(KysymysRepository krepository, VastausRepository vastausRepository, VaihtoehtoRepository veRepository, 
+			KyselyRepository kyselyRepository, UserRepository userrepository) {
 		return (args) -> {
 			
 			log.info("Tallenna kysely");
@@ -62,6 +65,12 @@ public class KyselylomakeApplication {
      		veRepository.save(ve1);
      		veRepository.save(ve2);
      		veRepository.save(ve3);
+     		
+     		User u = new User("user", "$2b$10$xqqmzNgMQYMrYfYALdZj.efa8NNYGaSlVN.SepPJLOn6TeD83rElW", "USER");
+     		User u2 = new User("admin", "$2b$10$x0592PKNYWaHbZOokuJhTebA6eetoxa.iuiZqlfTWSr9smeemiLiK", "ADMIN");
+     		
+     		userrepository.save(u);
+     		userrepository.save(u2);
      		
 			
 			log.info("fetch kysymykset");
