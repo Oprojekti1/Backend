@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -22,7 +23,6 @@ import ohjelmistoprojekti1.kyselylomake.domain.VastausRepository;
 
 @CrossOrigin
 @Controller
-
 public class VastausController {
 
 	@Autowired
@@ -33,12 +33,14 @@ public class VastausController {
 
 	// Restful service to get all vastaus
 	@RequestMapping(value = "/vastaukset", method = RequestMethod.GET)
+
 	public @ResponseBody List<Vastaus> vasListRest() {
 		return (List<Vastaus>) vastausRepository.findAll();
 	}
 
 	// Restful service to get vastaus by id
 	@RequestMapping(value = "/vastaukset/{vastid}", method = RequestMethod.GET)
+
 	public @ResponseBody Vastaus findVastRest(@PathVariable("vastid") Long vastid) {
 		return vastausRepository.findByVastid(vastid);
 	}
@@ -46,6 +48,7 @@ public class VastausController {
 
 	// Restful service to save a new vastaus
 	@RequestMapping(value = "/vastaus/{kysid}", method = RequestMethod.POST)
+
 	public @ResponseBody Vastaus saveVastRest(@PathVariable("kysid") Long kysid, @RequestBody Vastaus vastaus) {
 		//vastausRepository.save(vastaus);
 		// vastaus = vastausRepository.findByVastid(kysid);

@@ -3,26 +3,34 @@
 <head>
 <title>Kyselyt</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-
-
+<link href="../styles/home.css" th:ref="@{/styles/home.css}"
+	type="text/css" rel="stylesheet" />
 </head>
 <body>
 
-	<h1>Kyselyt</h1>
-
+	<header>
+		<h1>Tervetuloa etusivulle</h1>
+	</header>
+	<div class="topnav">
+		<a class="active" href="/auth/add">Lisää kysely</a> <a class="active"
+			href="/login">Kirjaudu ulos</a>
+	</div>
+	<br>
+		<header>
+		<h2>Vaihtoehtojen lisäys tapahtuu kysymys listauksessa, siellä löytyy myös vaihtoehtolistaus</h2>
+	</header>
 	<table>
 		<tr>
 			<th>Nimi</th>
+			<th>Lisää Kysymyksiä</th>
+			<th>Kysymykset</th>
 		</tr>
 		<tr th:each="kysely : ${kyselyt}">
 			<td th:text="${kysely.nimi}">Nimi</td>
-			<td><a th:href="@{/addkysymys/{id}(id=${kysely.kyselyId})}">Lisää
+			<td><a th:href="@{/auth/addkysymys/{id}(id=${kysely.kyselyId})}">Lisää
 					kysymys</a>
-			<td><a th:href="@{/questions/{id}(id=${kysely.kyselyId})}">Kysymykset</a>
+			<td><a th:href="@{/auth/questions/{id}(id=${kysely.kyselyId})}">Kysymykset</a>
 		</tr>
 	</table>
-	<a href="/add">Lisää kysely</a>
-
-
 </body>
 </html>

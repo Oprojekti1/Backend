@@ -67,8 +67,8 @@ public class KyselylomakeApplication {
      		veRepository.save(ve2);
      		veRepository.save(ve3);
      		
-     		User u = new User("user", "$2b$10$xqqmzNgMQYMrYfYALdZj.efa8NNYGaSlVN.SepPJLOn6TeD83rElW", "USER");
-     		User u2 = new User("admin", "$2b$10$x0592PKNYWaHbZOokuJhTebA6eetoxa.iuiZqlfTWSr9smeemiLiK", "ADMIN");
+     		User u = new User("user", "$2b$10$xqqmzNgMQYMrYfYALdZj.efa8NNYGaSlVN.SepPJLOn6TeD83rElW", "USER"); //salis user
+     		User u2 = new User("admin", "$2b$10$x0592PKNYWaHbZOokuJhTebA6eetoxa.iuiZqlfTWSr9smeemiLiK", "ADMIN"); //salis admin
      		
      		userrepository.save(u);
      		userrepository.save(u2);

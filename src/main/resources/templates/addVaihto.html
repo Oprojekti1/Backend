@@ -1,18 +1,28 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-<title>Kysymykset</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link href="../../styles/signandlogin.css"
+	th:ref="@{/styles/signandlogin.css}" type="text/css" rel="stylesheet" />
 </head>
 <body>
-	<h2>Lisää kysymys</h2>
-	
+<header>
+		<h1>Lisää vaihtoehto</h1>
+	</header>
+		<div class="topnav">
+		<a class="active" href="/login">Kirjaudu ulos</a>
+	</div>
+	<br>
 	<form th:object="${vaihto}" th:action="@{../saveVaihto}" action="#" method="post">
 	    <input type="hidden" th:field="*{kysymys.kysid}" />
-	    <label for="vaihtoehto">Vaihtoehto</label>
-	    <input type="text" th:field="*{vaihtoehtoja}" class="form-control"/>
+	    <br>
+	    <label for="vaihtoehto">Vaihtoehto:</label>
+	    <input type="text" th:field="*{vaihtoehtoja}" placeholder="Anna vaihtoehto"/>
 	    
-	<button type="submit">Tallenna</button>
+    <br>
+	  <button type="submit">Tallenna</button>
+	    	 <a href="/auth/kysely" class="button">Peruuta</a>
+	    	 <br>
 	</form>
 	
 	

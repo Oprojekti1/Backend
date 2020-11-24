@@ -1,0 +1,97 @@
+header {
+	font-family: sans-serif;
+	color: #4d4d4d;
+	text-align: center;
+	padding: 16px;
+	background-color: #f2f2f2;
+}
+
+body {
+	font-family: Arial, Helvetica, sans-serif;
+	background-color: white;
+}
+
+.topnav {
+  overflow: hidden;
+  background-color: #d9d9d9;
+}
+
+.topnav a, button {
+  float: left;
+  display: block;
+  color: black;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 17px;
+}
+
+.topnav a:hover , button:hover{
+  background-color:  #808080;
+  color: black;
+}
+
+
+
+
+.topnav input[type=text] {
+  padding: 6px;
+  margin-top: 8px;
+  font-size: 17px;
+  border: none;
+}
+
+
+/* Bordered form */
+form {
+	border: 16px solid #666666;
+	width: 30%;
+	margin-left: auto;
+	margin-right: auto;
+	text-align: left;
+	background-color: #f2f2f2;
+}
+
+/* Full-width inputs */
+input[type=text], input[type=password] {
+	width: 90%;
+	padding: 12px 20px;
+	margin: 20px 10px;
+	display: inline-block;
+	border: 1px solid #ccc;
+	box-sizing: border-box;
+}
+
+button {
+	padding: 8px 22px;
+	background-color: #f2f2f2;
+}
+
+a:link, a:visited {
+	background-color: #f2f2f2;
+	color: black;
+	border: 2px solid black;
+	padding: 9px 30px;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+
+}
+
+a:hover, a:active {
+	opacity: 0.9;
+	  background-color: #ff4d4d;
+}
+
+button:hover {
+	opacity: 0.9;
+	  background-color:  #808080;
+}
+
+
+
+.container {
+	padding: 16px;
+	height: 100%;
+
+}

@@ -3,16 +3,31 @@
 <head>
 <title>Kyselyt</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link href="../../styles/signandlogin.css"
+	th:ref="@{/styles/signandlogin.css}" type="text/css" rel="stylesheet" />
 </head>
 <body>
-	<h2>Lisää kysely</h2>
+<header>
+		<h1>Lisää Kysely</h1>
+	
+	</header>
+	<div class="topnav">
+	 <a class="active" href="/login">Kirjaudu ulos</a>
+	</div>
+	
+	<div class="container">
 	
 	<form th:object="${kysely}" th:action="@{save}" action="#" method="post">
-	    <label for="nimi">Nimi</label>
-	    <input type="text" id="title" th:field="*{nimi}" class="form-control"/>
-	    <input type="submit" value="Save"></input>
+	<br>
+	    <label for="nimi">Nimi:</label>
+	  
+	    <input type="text" th:field="*{nimi}" placeholder="Anna nimi"/>
+	    <br>
+	  <button type="submit">Tallenna</button>
+	    	 <a href="/auth/kysely" class="button">Peruuta</a>
+	    	 <br>
 	</form>
-	
+	</div>
 	
 
 

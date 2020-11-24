@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Add User</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="../styles/signandlogin.css" th:ref="@{/styles/signandlogin.css}"
+	type="text/css" rel="stylesheet" />
+</head>
+<body>
+	<header class="header">
+		<h1>Rekisteröidy</h1>
+	</header>
+	<br>
+	<div>
+		<form th:object="${signupform}" th:action="@{/saveuser}" action="#"
+			method="post">
+		
+			<div class="container">
+				 
+				<div>
+					<p th:if="${#fields.hasErrors('username')}" th:errors="*{username}">Username
+					Error</p>
+				<label>Käyttäjänimi
+					<input type="text" th:field="*{username}"
+					placeholder="Anna käyttäjänimesi(5-30 merkkiä pitkä)"/>
+				</label>
+			
+					</div>
+			
+				<div>
+						<p th:if="${#fields.hasErrors('password')}"
+						th:errors="*{password}">error</p>
+				<label>Salsana<input
+					th:field="*{password}" type="password"
+					placeholder="Anna salasanasi(4-30 merkkiä pitkä)"/>
+					</label>
+					</div>
+					<div>
+						<p th:if="${#fields.hasErrors('passwordCheck')}"
+						th:errors="*{passwordCheck}">Password match error</p>
+				 <label>Varmista salasana <input th:field="*{passwordCheck}" type="password"
+					placeholder="Varmista salasana"/>
+				</label> 
+			<br>
+						</div>
+				    <button type="submit">Tallenna</button>
+				 <a href="/login" class="button">Peruuta</a>
+				<br>
+				<br>
+			</div>
+		</form>
+	</div>
+</body>
+</html>

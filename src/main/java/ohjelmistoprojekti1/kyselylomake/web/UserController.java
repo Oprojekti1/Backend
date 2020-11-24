@@ -20,14 +20,19 @@ public class UserController {
 	@Autowired
     private UserRepository repository; 
 	
-    @RequestMapping(value = "signup")
+    @RequestMapping(value = "/signup")
     public String addStudent(Model model){
     	model.addAttribute("signupform", new SignupForm());
         return "signup";
     }	
     
+	@RequestMapping(value = "/login", method = RequestMethod.GET)
+	public String homePage() {
+		return "login";
+	}
+    
   
-    @RequestMapping(value = "saveuser", method = RequestMethod.POST)
+    @RequestMapping(value = "/saveuser", method = RequestMethod.POST)
     public String save(@Valid @ModelAttribute("signupform") SignupForm signupForm, BindingResult bindingResult) {
     	if (!bindingResult.hasErrors()) { // validation errors
     		if (signupForm.getPassword().equals(signupForm.getPasswordCheck())) { // check password match		
@@ -38,7 +43,7 @@ public class UserController {
 		    	User newUser = new User();
 		    	newUser.setPasswordHash(hashPwd);
 		    	newUser.setUsername(signupForm.getUsername());
-		    	newUser.setRole("USER");
+		    	newUser.setRole("ADMIN");
 		    	if (repository.findByUsername(signupForm.getUsername()) == null) { // Check if user exists
 		    		repository.save(newUser);
 		    	}

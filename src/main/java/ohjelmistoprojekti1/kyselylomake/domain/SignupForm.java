@@ -10,15 +10,15 @@ public class SignupForm {
     private String username = "";
 
     @NotEmpty
-    @Size(min=7, max=30)
+    @Size(min=4, max=30)
     private String password = "";
 
     @NotEmpty
-    @Size(min=7, max=30)
+    @Size(min=4, max=30)
     private String passwordCheck = "";
 
     @NotEmpty
-    private String role = "USER";
+    private String role = "ADMIN"; // eikö pitäisi olla admin?
 
 	public String getUsername() {
 		return username;

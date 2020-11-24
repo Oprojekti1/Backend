@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -29,18 +30,20 @@ public class KyselyController {
 
 	@Autowired
 	private KyselyRepository kyselyRepository;
-	
+
 	@Autowired
 	private VaihtoehtoRepository vrepository;
 
 	// Restful service to get all the questions
 	@RequestMapping(value = "/kysymykset", method = RequestMethod.GET)
+
 	public @ResponseBody List<Kysymys> kysListRest() {
 		return (List<Kysymys>) kysrepository.findAll();
 	}
 
 	// Restful service to get question by id
 	@RequestMapping(value = "/kysymykset/{kysid}", method = RequestMethod.GET)
+
 	public @ResponseBody Optional<Kysymys> findKysRest(@PathVariable("kysid") Long kysid) {
 		return kysrepository.findById(kysid);
 	}
@@ -53,79 +56,83 @@ public class KyselyController {
 
 	// Restful service haetaan kysely
 	@RequestMapping(value = "/kyselyt", method = RequestMethod.GET)
+
 	public @ResponseBody List<Kysely> kyselyListRest() {
 		return (List<Kysely>) kyselyRepository.findAll();
 	}
-	
+
 	@RequestMapping(value = "/kyselyt/{kyselyId}", method = RequestMethod.GET)
-	public @ResponseBody Optional<Kysely> findKyselyRest(@PathVariable("kyselyId") Long kyselyId){
-		
-		System.out.println( kyselyRepository.findById(kyselyId));
-		return  kyselyRepository.findById(kyselyId);
-	
+
+	public @ResponseBody Optional<Kysely> findKyselyRest(@PathVariable("kyselyId") Long kyselyId) {
+
+		System.out.println(kyselyRepository.findById(kyselyId));
+		return kyselyRepository.findById(kyselyId);
+
 	}
-	
-	
+
 	// ThymeLeaf enpointit
-	
-	@RequestMapping("/kysely")
+
+	@RequestMapping("/auth/kysely")
+	@PreAuthorize("hasAnyAuthority('ADMIN')")
 	public String KyselyLista(Model model) {
-	     model.addAttribute("kyselyt", kyselyRepository.findAll());
-		
+		model.addAttribute("kyselyt", kyselyRepository.findAll());
+
 		return "kyselyt";
 	}
-	
-	@RequestMapping(value = "/add")
+
+	@RequestMapping(value = "/auth/add")
+	@PreAuthorize("hasAnyAuthority('ADMIN')")
 	public String addKysely(Model model) {
 		model.addAttribute("kysely", new Kysely());
 		// model.addAttribute("kysymykset", kysrepository.findAll());
 		return "addkysely";
 	}
-	
-	@RequestMapping(value = "/save", method = RequestMethod.POST)
+
+	@RequestMapping(value = "/auth/save", method = RequestMethod.POST)
+	@PreAuthorize("hasAnyAuthority('ADMIN')")
 	public String save(Kysely kysely) {
 		kyselyRepository.save(kysely);
-		return "redirect:/kysely";
+		return "redirect:kysely";
 	}
-	
-	@RequestMapping(value = "/addkysymys/{id}", method = RequestMethod.GET)
-	public String addKysymys(@PathVariable("id") Long kyselyId,  Model model) {
+
+	@RequestMapping(value = "/auth/addkysymys/{id}", method = RequestMethod.GET)
+	@PreAuthorize("hasAnyAuthority('ADMIN')")
+	public String addKysymys(@PathVariable("id") Long kyselyId, Model model) {
 		Kysely kysely = kyselyRepository.findById(kyselyId).get();
 		Kysymys kysymys = new Kysymys();
 		kysymys.setKysely(kysely);
 		model.addAttribute("kysymys", kysymys);
-	
-	//	model.addAttribute("vaihtoehdot", vrepository.findAll());
+
+		// model.addAttribute("vaihtoehdot", vrepository.findAll());
 		return "addkysymys";
-		
+
 	}
-	
-	@RequestMapping(value= "/savekysymys", method = RequestMethod.POST)
+
+	@RequestMapping(value = "/auth/savekysymys", method = RequestMethod.POST)
+	@PreAuthorize("hasAnyAuthority('ADMIN')")
 	public String saveKysymys(@ModelAttribute Kysymys kysymys, Model model) {
 		kysrepository.save(kysymys);
-		
 //		model.addAttribute("kyselyt", kyselyRepository.findAll());
-	//	model.addAttribute("vaihtoehdot", vrepository.findAll());
+		// model.addAttribute("vaihtoehdot", vrepository.findAll());
 		return "redirect:kysely";
 	}
 
-	@RequestMapping(value = "/questions/{id}", method = RequestMethod.GET)
-	public String kyssarit(@PathVariable("id") Long kyselyId,  Model model) {
+	@RequestMapping(value = "/auth/questions/{id}", method = RequestMethod.GET)
+	@PreAuthorize("hasAnyAuthority('ADMIN')")
+	public String kyssarit(@PathVariable("id") Long kyselyId, Model model) {
 		Kysely kysely = kyselyRepository.findById(kyselyId).get();
 
 		List<Kysymys> kysymykset = kysely.getKysymykset();
-	
+
 		model.addAttribute("kysymykset", kysymykset);
-	
-	//	model.addAttribute("vaihtoehdot", vrepository.findAll());
+
+		// model.addAttribute("vaihtoehdot", vrepository.findAll());
 		return "kysymyksetLista";
-		
-	}
-	//public String quePage(Model model) {
-	//	List<Kysymys> kysymykset = (List<Kysymys>) kysrepository.findAll();
-	//	model.addAttribute("kysymykset", kysymykset);
-	//	model.addAttribute("vaihtoehdot", vrepository.findAll());
-	//	return "kysymyksetLista";
-	}
 
-
+	}
+	// public String quePage(Model model) {
+	// List<Kysymys> kysymykset = (List<Kysymys>) kysrepository.findAll();
+	// model.addAttribute("kysymykset", kysymykset);
+	// model.addAttribute("vaihtoehdot", vrepository.findAll());
+	// return "kysymyksetLista";
+}
