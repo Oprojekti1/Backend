@@ -2,10 +2,13 @@ package ohjelmistoprojekti1.kyselylomake.web;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -51,38 +54,6 @@ public class VaihtoehtoController {
 		return veRepository.save(vaihtoehto);
 	}
 
-	// ThymeLeaf:
 
-	@RequestMapping(value = "/auth/addvaihto/{id}", method = RequestMethod.GET)
-	@PreAuthorize("hasAnyAuthority('ADMIN')")
-	public String addKysymys(@PathVariable("id") Long kysid, Model model) {
-		Kysymys kysymys = kysrepository.findByKysid(kysid);
-		Vaihtoehto vaihto = new Vaihtoehto();
-		vaihto.setKysymys(kysymys);
-		model.addAttribute("vaihto", vaihto);
 
-		// model.addAttribute("vaihtoehdot", vrepository.findAll());
-		return "addVaihto";
-
-	}
-
-	@RequestMapping(value = "/auth/saveVaihto", method = RequestMethod.POST)
-	@PreAuthorize("hasAnyAuthority('ADMIN')")
-	public String saveVaihtoehdot(@ModelAttribute Vaihtoehto vaihtoehtoja, Model model) {
-		veRepository.save(vaihtoehtoja);
-		return "redirect:/vaihtoehdot";
-	}
-
-	@RequestMapping(value = "/auth/vaihtikset/{id}", method = RequestMethod.GET)
-	@PreAuthorize("hasAnyAuthority('ADMIN')")
-	public String vaihtikset(@PathVariable("id") Long kysid, Model model) {
-		Kysymys kysymys = kysrepository.findById(kysid).get();
-
-		List<Vaihtoehto> vaihdot = kysymys.getVaihtoehdot();
-
-		model.addAttribute("vaihdot", vaihdot);
-
-		return "vaihtoLista";
-
-	}
 }

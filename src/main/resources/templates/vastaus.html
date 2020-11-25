@@ -2,18 +2,26 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link href="../styles/home.css" th:ref="@{/styles/home.css}"
+	type="text/css" rel="stylesheet" />
 </head>
-
 <body>
-<table>
+	<header>
+		<h1>Kyselyyn vastanneiden vastaukset</h1>
+	</header>
+	<div class="topnav">
+		<a class="active" href="/auth/kysely">Koti</a> <a class="active"
+			href="/login">Kirjaudu ulos</a>
+	</div>
+	<br>
+	<table>
 		<tr>
 			<th>Vastaus id</th>
 			<th>Vastaukset</th>
-			
 		</tr>
-		<tr th:each="vastaus : ${vastaukset}" >
+		<tr th:each="vastaus : ${vastaukset}">
 			<td th:text="${vastaus.vastid}">id</td>
-				<td th:text="${vastaus.vast}">vastaus</td>
+			<td th:text="${vastaus.vast}">vastaus</td>
 		</tr>
 	</table>
 </body>

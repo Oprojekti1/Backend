@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-
 import ohjelmistoprojekti1.kyselylomake.domain.Kysymys;
 import ohjelmistoprojekti1.kyselylomake.domain.KysymysRepository;
 import ohjelmistoprojekti1.kyselylomake.domain.Vastaus;
@@ -44,26 +43,14 @@ public class VastausController {
 	public @ResponseBody Vastaus findVastRest(@PathVariable("vastid") Long vastid) {
 		return vastausRepository.findByVastid(vastid);
 	}
-	
 
 	// Restful service to save a new vastaus
 	@RequestMapping(value = "/vastaus/{kysid}", method = RequestMethod.POST)
 
 	public @ResponseBody Vastaus saveVastRest(@PathVariable("kysid") Long kysid, @RequestBody Vastaus vastaus) {
-		//vastausRepository.save(vastaus);
-		// vastaus = vastausRepository.findByVastid(kysid);
 		Kysymys kysymys = kysrepository.findByKysid(kysid);
-//		Vastaus vastaus = vastausRepository.findByVastid(vastid);
 		vastaus.setKysymys(kysymys);
 		return vastausRepository.save(vastaus);
 	}
-	
-//	@RequestMapping(value = "/vastauslista", method = RequestMethod.GET)
-//	public String showVastaukset(Model model) {
-//		List<Vastaus> vastaukset = (List<Vastaus>) vastausRepository.findAll();
-//		System.out.println(vastaukset);
-//		model.addAttribute("vastaukset", vastaukset);
-//		return "vastaus";
-//	}
 
 }

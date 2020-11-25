@@ -8,17 +8,22 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 public class Kysely {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long kyselyId;
+
+	@NotEmpty(message = "Nimi ei saa olla tyhjä!")
+	@Size(min = 4, max = 30, message = "Nimen pitää olla 4-30 merkkiä pitkä!")
 	private String nimi;
-	
+
 	@JsonManagedReference
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "kysely")
 	private List<Kysymys> kysymykset;
@@ -28,7 +33,7 @@ public class Kysely {
 		this.kyselyId = kyselyId;
 		this.nimi = nimi;
 	}
-	
+
 	public Kysely(String nimi) {
 		super();
 		this.nimi = nimi;
@@ -68,8 +73,4 @@ public class Kysely {
 		return "Kysely [kyselyId=" + kyselyId + ", nimi=" + nimi + "]";
 	}
 
-	
-	
 }
-
-

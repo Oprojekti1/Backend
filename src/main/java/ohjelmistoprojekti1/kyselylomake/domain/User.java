@@ -5,30 +5,28 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Entity
+@Table(name = "user_table") // Posgres ei hyväksy pelkkää user taulukon nimeksi, vaan nimi pitää vaihtaa, jotta se toimii
 public class User {
 
-	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id", nullable = false, updatable = false)
+	private Long id;
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", nullable = false, updatable = false)
-    private Long id;
+	@Column(name = "username", nullable = false, unique = true)
+	private String username;
 
-   
-    @Column(name = "username", nullable = false, unique = true)
-    private String username;
+	@Column(name = "password", nullable = false)
+	private String passwordHash;
 
-    @Column(name = "password", nullable = false)
-    private String passwordHash;
-    
+	@Column(name = "role", nullable = false)
+	private String role;
 
-    @Column(name = "role", nullable = false)
-    private String role;
-    
-    public User() {
-    }
+	public User() {
+	}
 
 	public User(String username, String passwordHash, String role) {
 		super();
@@ -60,7 +58,6 @@ public class User {
 	public void setPasswordHash(String passwordHash) {
 		this.passwordHash = passwordHash;
 	}
-	
 
 	public String getRole() {
 		return role;
@@ -71,6 +68,3 @@ public class User {
 	}
 
 }
-
-
-

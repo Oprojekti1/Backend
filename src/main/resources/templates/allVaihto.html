@@ -3,7 +3,7 @@
 <html xmlns:th="http://www.thymeleaf.org"
 	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <head>
-<title>Kysymykset</title>
+<title>Vaihtoehdot</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link href="../../styles/home.css" th:ref="@{/styles/home.css}"
@@ -11,7 +11,7 @@
 </head>
 <body>
 	<header>
-		<h1>Listaus kysymyksistä</h1>
+		<h1>Lista vaihtoehdoista</h1>
 	</header>
 	<div class="topnav">
 		<a class="active" href="/auth/kysely">Koti</a> <a class="active"
@@ -21,19 +21,11 @@
 	<table>
 		<tr>
 			<th>Id</th>
-			<th>Kysymys</th>
-			<th>Kysymystyyppi</th>
-			<th>Lisää vaihtoehto</th>
-			<th>Vaihtoehdot</th>
+			<th>Vaihtoehto</th>
 		</tr>
-		<tr th:each="kysymys : ${kysymykset}">
-			<td th:text="${kysymys.kysid}">Id</td>
-			<td th:text="${kysymys.kys}">Nimi</td>
-			<td th:text="${kysymys.kysymystyyppi}">Kuvaus</td>
-			<td><a th:href="@{/auth/addvaihto/{id}(id=${kysymys.kysid})}">Lisää
-					Vaihtoehto</a>
-			<td><a th:href="@{/auth/vaihtikset/{id}(id=${kysymys.kysid})}">Näytä
-					Vaihtoehdot</a>
+		<tr th:each="vaihtoehto : ${vaihtoehdot}">
+			<td th:text="${vaihtoehto.veId}">Id</td>
+			<td th:text="${vaihtoehto.vaihtoehtoja}">Nimi</td>
 		</tr>
 	</table>
 </body>

@@ -6,27 +6,25 @@
 	th:ref="@{/styles/signandlogin.css}" type="text/css" rel="stylesheet" />
 </head>
 <body>
-<header>
+	<header>
 		<h1>Lisää vaihtoehto</h1>
 	</header>
-		<div class="topnav">
+	<div class="topnav">
 		<a class="active" href="/login">Kirjaudu ulos</a>
 	</div>
 	<br>
-	<form th:object="${vaihto}" th:action="@{../saveVaihto}" action="#" method="post">
-	    <input type="hidden" th:field="*{kysymys.kysid}" />
-	    <br>
-	    <label for="vaihtoehto">Vaihtoehto:</label>
-	    <input type="text" th:field="*{vaihtoehtoja}" placeholder="Anna vaihtoehto"/>
-	    
-    <br>
-	  <button type="submit">Tallenna</button>
-	    	 <a href="/auth/kysely" class="button">Peruuta</a>
-	    	 <br>
+	<form th:object="${vaihtoehto}" th:action="@{/auth/saveVaihto}"
+		action="#" method="post">
+		<br>
+		<div>
+			<p th:if="${#fields.hasErrors('vaihtoehtoja')}"
+				th:errors="*{vaihtoehtoja}">Error</p>
+			<label>Vaihtoehto:</label> <input type="text"
+				th:field="*{vaihtoehtoja}" placeholder="Anna vaihtoehto" />
+		</div>
+		<input type="hidden" th:field="*{kysymys.kysid}" /> <br>
+		<button type="submit">Tallenna</button>
+		<a href="/auth/kysely" class="button">Peruuta</a> <br>
 	</form>
-	
-	
-
-
 </body>
 </html>

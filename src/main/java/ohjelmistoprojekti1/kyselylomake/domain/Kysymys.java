@@ -10,6 +10,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
@@ -19,18 +21,21 @@ public class Kysymys {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long kysid;
+
+	@NotEmpty(message = "Kysymys ei saa olla tyhjä!")
+	@Size(min = 4, max = 60, message = "Kysymyksen pitää olla 4-60 merkkiä pitkä!")
 	private String kys;
-	// private String kystyp;
+
 	private Kysymystyyppi kysymystyyppi;
-	
+
 	@JsonManagedReference
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "kysymys")
 	private List<Vastaus> vastaukset;
-	
+
 	@JsonManagedReference
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "kysymys")
 	private List<Vaihtoehto> vaihtoehdot;
-	
+
 	@JsonBackReference
 	@ManyToOne
 	@JoinColumn(name = "kyselyId")
@@ -39,54 +44,32 @@ public class Kysymys {
 	public Kysymys() {
 	} // lisätty RL
 
-//public Kysymys () {
-//	super();
-//	this.kysid = null;
-//	this.radiokys = null;
-//
-//}
-//
-//	public Kysymys(String radiokys) {
-//		super();
-//		this.radiokys = radiokys;
-//
-//	}
-//
-//	public Kysymys(Long kysid, String radiokys) {
-//		this.kysid = kysid;
-//		this.radiokys = radiokys;
-//
-//	}
-	
 	public enum Kysymystyyppi {
-		radiokysymys,
-		avoin
+		radiokysymys, avoin
 	}
 
-
 	public Kysymys(Long kysid, String kys, Kysymystyyppi kysymystyyppi, Kysely kysely) {
-	super();
-	this.kysid = kysid;
-	this.kys = kys;
-	this.kysymystyyppi = kysymystyyppi;
-	this.kysely = kysely;
-}
+		super();
+		this.kysid = kysid;
+		this.kys = kys;
+		this.kysymystyyppi = kysymystyyppi;
+		this.kysely = kysely;
+	}
 
 	public Kysymys(String kys, Kysymystyyppi kysymystyyppi, Kysely kysely) {
-	super();
-	this.kys = kys;
-	this.kysymystyyppi = kysymystyyppi;
-	this.kysely = kysely;
-}
+		super();
+		this.kys = kys;
+		this.kysymystyyppi = kysymystyyppi;
+		this.kysely = kysely;
+	}
 
 	public Long getKysid() {
 		return kysid;
 	}
+
 	public void setKysid(Long kysid) {
 		this.kysid = kysid;
 	}
-
-	
 
 	public String getKys() {
 		return kys;
@@ -96,7 +79,6 @@ public class Kysymys {
 		this.kys = kys;
 	}
 
-	
 	public Kysely getKysely() {
 		return kysely;
 	}
@@ -105,8 +87,6 @@ public class Kysymys {
 		this.kysely = kysely;
 	}
 
-	
-
 	public List<Vastaus> getVastaukset() {
 		return vastaukset;
 	}
@@ -114,8 +94,6 @@ public class Kysymys {
 	public void setVastaukset(List<Vastaus> vastaukset) {
 		this.vastaukset = vastaukset;
 	}
-	
-	
 
 	public List<Vaihtoehto> getVaihtoehdot() {
 		return vaihtoehdot;
@@ -124,36 +102,19 @@ public class Kysymys {
 	public void setVaihtoehdot(List<Vaihtoehto> vaihtoehdot) {
 		this.vaihtoehdot = vaihtoehdot;
 	}
-	
+
 	public Kysymystyyppi getKysymystyyppi() {
 		return kysymystyyppi;
 	}
-	
+
 	public void setKysymystyyppi(Kysymystyyppi kysymystyyppi) {
 		this.kysymystyyppi = kysymystyyppi;
 	}
 
 	@Override
 	public String toString() {
-		return "Kysymys [kysid=" + kysid + ", kys=" + kys + ", kysymystyyppi=" + kysymystyyppi +  ", kysely=" + this.getKysely() + "]";
+		return "Kysymys [kysid=" + kysid + ", kys=" + kys + ", kysymystyyppi=" + kysymystyyppi + ", kysely="
+				+ this.getKysely() + "]";
 	}
-	
-	
-
-//	@Override
-//	public String toString() {
-//		if (this.vaihtoehdot != null) {
-//		return "Kysymys [kysid=" + kysid + ", kys=" + kys + ", kysymystyyppi=" + kysymystyyppi + ", kysely=" + this.getKysely() + 
-//				", vaihtoehdot =" + this.getVaihtoehdot() + "]";
-//	}else {
-//		return "Kysymys [kysid=" + kysid + ", kys=" + kys + ", kysymystyyppi=" + kysymystyyppi + ", kysely=" + this.getKysely() + "]";
-//	}
-//	}
-
-
-	
-	
-
-
 
 }

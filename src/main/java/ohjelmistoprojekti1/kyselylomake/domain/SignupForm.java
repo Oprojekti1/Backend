@@ -3,22 +3,21 @@ package ohjelmistoprojekti1.kyselylomake.domain;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 
-
 public class SignupForm {
-    @NotEmpty
-    @Size(min=5, max=30)
-    private String username = "";
+	@NotEmpty(message = "Käyttjänimi ei saa olla tyhjä!")
+	@Size(min = 4, max = 30, message = "Käyttäjänimen pitää olla 4-30 merkkiä pitkä!")
+	private String username = "";
 
-    @NotEmpty
-    @Size(min=4, max=30)
-    private String password = "";
+	@NotEmpty(message = "Salasana ei saa olla tyhjä!")
+	@Size(min = 4, max = 30, message = "Salasanan pitää olla 4-30 merkkiä pitkä!")
+	private String password = "";
 
-    @NotEmpty
-    @Size(min=4, max=30)
-    private String passwordCheck = "";
+	@NotEmpty(message = "Salasana ei saa olla tyhjä!")
+	@Size(min = 4, max = 30, message = "Salasanan pitää olla 4-30 merkkiä pitkä!")
+	private String passwordCheck = "";
 
-    @NotEmpty
-    private String role = "ADMIN"; // eikö pitäisi olla admin?
+	@NotEmpty
+	private String role = "ADMIN"; // eikö pitäisi olla admin?
 
 	public String getUsername() {
 		return username;
@@ -51,8 +50,5 @@ public class SignupForm {
 	public void setRole(String role) {
 		this.role = role;
 	}
-    
-    
+
 }
-
-

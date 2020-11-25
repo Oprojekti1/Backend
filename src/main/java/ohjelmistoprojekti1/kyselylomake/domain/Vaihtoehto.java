@@ -6,6 +6,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
+
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
@@ -15,6 +18,9 @@ public class Vaihtoehto {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long veId;
+	
+	@NotEmpty(message="Vaihtoehto ei saa olla tyhjä!")
+	@Size(min=2, max=20, message="Vaihtoehdon pitää olla 2-20 merkkiä pitkä!")
 	private String vaihtoehtoja;
 	
 	@JsonBackReference

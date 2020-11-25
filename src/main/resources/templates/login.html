@@ -1,4 +1,4 @@
-  
+
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
 	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
@@ -17,16 +17,12 @@
 		<div th:if="${param.error}">Virheellinen käyttäjänimi ja
 			salasana.</div>
 		<form th:action="@{/login}" method="post">
-
-		
 			<div class="container">
 				<label>Käyttäjä nimi: <input type="text" name="username"
-					placeholder="Käyttäjä nimi" /></label> <br>
-				<label>Salasna: <input name="password" type="password"
-					placeholder="Salasana" /></label>
+					placeholder="Käyttäjä nimi" /></label> <br> <label>Salasna: <input
+					name="password" type="password" placeholder="Salasana" /></label>
 				<button type="submit">Kirjaudu sisään</button>
-				 <a href="/signup"
-					class="button">Rekisteröidy</a> <br>
+				<a href="/signup" class="button">Rekisteröidy</a> <br>
 			</div>
 		</form>
 	</div>

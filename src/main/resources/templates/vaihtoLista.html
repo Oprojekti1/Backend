@@ -11,13 +11,11 @@
 </head>
 <body>
 	<header>
-
 		<h1>Lista vaihtoehdoista</h1>
 	</header>
 	<div class="topnav">
-		<a class="active" href="/auth/kysely">Koti</a>
-		<a class="active" href="/login">Kirjaudu ulos</a>
-		
+		<a class="active" href="/auth/kysely">Koti</a> <a class="active"
+			href="/login">Kirjaudu ulos</a>
 	</div>
 	<br>
 	<table>
@@ -28,7 +26,6 @@
 		<tr th:each="vaihtoehto : ${vaihdot}">
 			<td th:text="${vaihtoehto.veId}">Id</td>
 			<td th:text="${vaihtoehto.vaihtoehtoja}">Nimi</td>
-
 		</tr>
 	</table>
 </body>
