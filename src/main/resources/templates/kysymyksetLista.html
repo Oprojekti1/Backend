@@ -1,0 +1,40 @@
+
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+<title>Kysymykset</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="../../styles/home.css" th:ref="@{/styles/home.css}"
+	type="text/css" rel="stylesheet" />
+</head>
+<body>
+	<header>
+		<h1>Listaus kysymyksistä</h1>
+	</header>
+	<div class="topnav">
+		<a class="active" href="/auth/kysely">Koti</a> <a class="active"
+			href="/login">Kirjaudu ulos</a>
+	</div>
+	<br>
+	<table>
+		<tr>
+			<th>Id</th>
+			<th>Kysymys</th>
+			<th>Kysymystyyppi</th>
+			<th>Lisää vaihtoehto</th>
+			<th>Vaihtoehdot</th>
+		</tr>
+		<tr th:each="kysymys : ${kysymykset}">
+			<td th:text="${kysymys.kysid}">Id</td>
+			<td th:text="${kysymys.kys}">Nimi</td>
+			<td th:text="${kysymys.kysymystyyppi}">Kuvaus</td>
+			<td><a th:href="@{/auth/addvaihto/{id}(id=${kysymys.kysid})}">Lisää
+					Vaihtoehto</a>
+			<td><a th:href="@{/auth/vaihtikset/{id}(id=${kysymys.kysid})}">Näytä
+					Vaihtoehdot</a>
+		</tr>
+	</table>
+</body>
+</html>

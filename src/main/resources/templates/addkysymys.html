@@ -1,0 +1,36 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Kysymykset</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link href="../../styles/signandlogin.css"
+	th:ref="@{/styles/signandlogin.css}" type="text/css" rel="stylesheet" />
+</head>
+<body>
+	<header>
+		<h1>Lisää Kysymys</h1>
+	</header>
+	<div class="topnav">
+		<a class="active" href="/login">Kirjaudu ulos</a>
+	</div>
+	<div class="container">
+		<form th:object="${kysymys}" th:action="@{/auth/savekysymys}"
+			action="#" method="post">
+			<input type="hidden" th:field="*{kysely.kyselyId}" /> <br>
+			<div>
+				<p th:if="${#fields.hasErrors('kys')}" th:errors="*{kys}">Error</p>
+				<label for="kysymys">Kysymys:</label> <br> <input type="text"
+					th:field="*{kys}" />
+			</div>
+			<label>Kysymystyyppi: </label> <br> <br> <select
+				th:field="*{kysymystyyppi}">
+				<option
+					th:each="kysymystyyppi: ${T(ohjelmistoprojekti1.kyselylomake.domain.Kysymys.Kysymystyyppi).values()}"
+					th:value="${kysymystyyppi}" th:text="${kysymystyyppi}"></option>
+			</select> <br> <br>
+			<button type="submit">Tallenna</button>
+			<a href="/auth/kysely" class="button">Peruuta</a> <br>
+		</form>
+	</div>
+</body>
+</html>

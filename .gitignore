@@ -31,3 +31,18 @@ build/
 
 ### VS Code ###
 .vscode/
+
+### VIM ###
+*.swp
+*.swo
+
+### GRADLE ###
+gradle/
+.gradle/
+bin/
+build/
+build.gradle
+gradlew
+gradlew.bat
+settings.gradle
+

@@ -14,7 +14,7 @@ public class Vastaus {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long vastid;
-	private String radiovast;
+	private String vast;
 
 	@JsonBackReference
 	@ManyToOne
@@ -25,9 +25,9 @@ public class Vastaus {
 		super();
 	}
 
-	public Vastaus(String radiovast, Kysymys kysymys) {
+	public Vastaus(String vast, Kysymys kysymys) {
 		super();
-		this.radiovast = radiovast;
+		this.vast = vast;
 		this.kysymys = kysymys;
 	}
 
@@ -39,12 +39,12 @@ public class Vastaus {
 		this.vastid = vastid;
 	}
 
-	public String getRadiovast() {
-		return radiovast;
+	public String getVast() {
+		return vast;
 	}
 
-	public void setRadiovast(String radiovast) {
-		this.radiovast = radiovast;
+	public void setVast(String vast) {
+		this.vast = vast;
 	}
 
 	public Kysymys getKysymys() {
@@ -57,7 +57,7 @@ public class Vastaus {
 
 	@Override
 	public String toString() {
-		return "Vastaus [vastid=" + vastid + ", radiovast=" + radiovast + ", kysymys=" + this.getKysymys() + "]";
+		return "Vastaus [vastid=" + vastid + ", vast=" + vast + ", kysymys=" + this.getKysymys() + "]";
 	}
 
 }
