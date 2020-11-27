@@ -22,7 +22,8 @@ import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import ohjelmistoprojekti1.kyselylomake.web.UserDetailServiceImpl;
 
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-
+//täälä määritellään spring securityyn liittyviä asetuksia kuten mahdollistetaan CSS käyttö
+//spring securitystä huolimatta ja määritellään mikä sivu/endpoint aukeaa sisäänkirjautumisen jälkeen
 @Configuration
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 @EnableWebSecurity
