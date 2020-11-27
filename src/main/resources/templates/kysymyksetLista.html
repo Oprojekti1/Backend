@@ -25,6 +25,7 @@
 			<th>Kysymystyyppi</th>
 			<th>Lisää vaihtoehto</th>
 			<th>Vaihtoehdot</th>
+			<th>Vastaukset</th>
 		</tr>
 		<tr th:each="kysymys : ${kysymykset}">
 			<td th:text="${kysymys.kysid}">Id</td>
@@ -34,6 +35,8 @@
 					Vaihtoehto</a>
 			<td><a th:href="@{/auth/vaihtikset/{id}(id=${kysymys.kysid})}">Näytä
 					Vaihtoehdot</a>
+					<td><a th:href="@{/auth/answersbykys/{id}(id=${kysymys.kysid})}">Näytä
+					Vastaukset</a>
 		</tr>
 	</table>
 </body>
