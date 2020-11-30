@@ -1,0 +1,44 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+<title>Vastaukset</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="../../styles/home.css" th:ref="@{/styles/home.css}"
+	type="text/css" rel="stylesheet" />
+</head>
+<body>
+	<header>
+		<h1>Listaus vastauksista</h1>
+	</header>
+	<div class="topnav">
+		<a class="active" href="/auth/kysely">Koti</a> <a class="active"
+			href="/login">Kirjaudu ulos</a>
+	</div>
+	<br>
+	<br>
+	<table>
+		<tr>
+			<th>Id</th>
+			<th>Vaihtoehto</th>
+			<th>Vastauksien määrä</th>
+		
+		</tr>
+<!-- 		<tr th:each="vastaus : ${answers}"> -->
+<!-- 			<td th:text="${vastaus.vastid}">Id</td> -->
+<!-- 			<td th:text="${vastaus.vast}">Vastaus</td> -->
+		
+<!-- 		</tr> -->
+		<tr th:each="vaihtoehto : ${vaihtoehdot}">
+			<td th:text="${vaihtoehto.veId}">Id</td>
+			<td th:text="${vaihtoehto.vaihtoehtoja}">Vaihtoehto</td>
+		
+			
+			
+		</tr>
+	
+	</table>
+</body>
+</html>
+	

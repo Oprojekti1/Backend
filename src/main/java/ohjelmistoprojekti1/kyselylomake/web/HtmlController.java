@@ -47,6 +47,40 @@ public class HtmlController {
 		model.addAttribute("vastaukset", vastaukset);
 		return "vastaus";
 	}
+	
+	// Vastaukset kysely id mukaan:
+	
+//	@RequestMapping(value = "/auth/answersbykysely/{id}", method = RequestMethod.GET)
+//	@PreAuthorize("hasAnyAuthority('ADMIN')")
+//	public String vastauksetKysely(@PathVariable("id") Long kyselyId, Model model) {
+//		Kysely kysely = kyselyRepository.findById(kyselyId).get();
+//		List<Vastaus> answers = kysely;
+//		model.addAttribute("answers", answers);
+//		return "vastauksetbykysely";
+//
+//	}
+	
+	// Vastaukset kysymys id mukaan:
+	@RequestMapping(value = "/auth/answersbykys/{id}", method = RequestMethod.GET)
+	@PreAuthorize("hasAnyAuthority('ADMIN')")
+	public String vastauksetkys(@PathVariable("id") Long kysId, Model model) {
+		Kysymys kysymys= kysrepository.findById(kysId).get();
+		List<Vastaus> answers = kysymys.getVastaukset();
+		
+	//	long total = answers.stream().distinct().count();
+		
+//		for (Vaihtoehto vaihtoehto : kysymys.getVaihtoehdot()) {
+//			System.out.println(vaihtoehto);
+//			for (Vaihtoehto vaihtoehto : kysymys.getVaihtoehdot()) {
+//				System.out.println(vaihtoehto);
+//				
+//			}
+//		}
+		model.addAttribute("vaihtoehdot", kysymys.getVaihtoehdot());
+		model.addAttribute("answers", answers);
+		return "vastausbykys";
+
+	}
 
 	// Kaikki kyselyt
 	@RequestMapping("/auth/kysely")
