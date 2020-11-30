@@ -11,9 +11,9 @@
 		<h1>Tervetuloa etusivulle</h1>
 	</header>
 	<div class="topnav">
-		<a class="active" href="/auth/add">Lisää kysely</a> 
-		 <a class="active" href="/vastauslista">Vastaukset</a>
-		<a class="active" href="/login">Kirjaudu ulos</a>
+		<a class="active" href="/auth/add">Lisää kysely</a> <a class="active"
+			href="/vastauslista">Vastaukset</a> <a class="active" href="/login">Kirjaudu
+			ulos</a>
 	</div>
 	<br>
 	<header>
@@ -22,17 +22,28 @@
 	</header>
 	<table>
 		<tr>
+			<th>ID</th>
 			<th>Nimi</th>
 			<th>Lisää Kysymyksiä</th>
 			<th>Kysymykset</th>
+
 			<th>Vastaukset</th>
+
+			<th>Poista kysely</th>
 		</tr>
 		<tr th:each="kysely : ${kyselyt}">
+			<td th:text="${kysely.kyselyId}">ID</td>
 			<td th:text="${kysely.nimi}">Nimi</td>
 			<td><a th:href="@{/auth/addkysymys/{id}(id=${kysely.kyselyId})}">Lisää
 					kysymys</a>
 			<td><a th:href="@{/auth/questions/{id}(id=${kysely.kyselyId})}">Kysymykset</a>
-		</tr>
+				<td><a
+				th:href="@{/auth/deletekysely/{id}(id=${kysely.kyselyId})}">Poista
+					kysely</a></td>
+					<!-- Kun endpointtiin lisätään /auth ei tarvitse käyttää sec:authorize -->
+<!-- 			<td sec:authorize="hasAuthority('ADMIN')"><a th:href="@{/deletekysely/{id}(id=${kysely.kyselyId})}">Poista kysely</a></td> -->
+		
+			</tr>
 	</table>
 </body>
 </html>
