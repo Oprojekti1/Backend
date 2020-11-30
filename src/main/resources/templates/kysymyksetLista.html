@@ -25,6 +25,7 @@
 			<th>Kysymystyyppi</th>
 			<th>Lisää vaihtoehto</th>
 			<th>Vaihtoehdot</th>
+			<th>Poista kysymys<th>
 		</tr>
 		<tr th:each="kysymys : ${kysymykset}">
 			<td th:text="${kysymys.kysid}">Id</td>
@@ -34,7 +35,9 @@
 					Vaihtoehto</a>
 			<td><a th:href="@{/auth/vaihtikset/{id}(id=${kysymys.kysid})}">Näytä
 					Vaihtoehdot</a>
-		    <td sec:authorize="hasAuthority('ADMIN')"><a th:href="@{/deletekysymys/{id}(id=${kysymys.kysid})}">Poista kysymys</a></td>
+					<td><a th:href="@{/auth/deletekysymys/{id}(id=${kysymys.kysid})}">Poista kysymys</a></td>
+						<!-- Kun endpointtiin lisätään /auth ei tarvitse käyttää sec:authorize -->
+<!-- 		    <td sec:authorize="hasAuthority('ADMIN')"><a th:href="@{/deletekysymys/{id}(id=${kysymys.kysid})}">Poista kysymys</a></td> -->
 		</tr>
 	</table>
 </body>

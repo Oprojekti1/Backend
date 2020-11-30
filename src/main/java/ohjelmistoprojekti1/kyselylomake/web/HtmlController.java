@@ -52,6 +52,8 @@ public class HtmlController {
 	@RequestMapping("/auth/kysely")
 	@PreAuthorize("hasAnyAuthority('ADMIN')")
 	public String KyselyLista(Model model) {
+//		List<Vastaus> vastaukset = (List<Vastaus>) vastausRepository.findAll();
+//		model.addAttribute("vastaukset", vastaukset);
 		model.addAttribute("kyselyt", kyselyRepository.findAll());
 
 		return "kyselyt";
@@ -161,18 +163,20 @@ public class HtmlController {
 		return "allVaihto";
 	}
 	
+	// Kyselyn poisto, lisätty /auth endpointtiin
 	@PreAuthorize("hasAuthority('ADMIN')")
-	@RequestMapping(value = "/deletekysely/{id}", method = RequestMethod.GET)
+	@RequestMapping(value = "/auth/deletekysely/{id}", method = RequestMethod.GET)
 	public String deleteKysely(@PathVariable("id") Long KyselyId, Model model) {
 		kyselyRepository.deleteById(KyselyId);
-		return "redirect:../auth/kysely";
+		return "redirect:../kysely";
 	}
 	
+	// Kysymyksen poisto, lisätty /auth endpointtiin
 	@PreAuthorize("hasAuthority('ADMIN')")
-	@RequestMapping(value = "/deletekysymys/{id}", method = RequestMethod.GET)
+	@RequestMapping(value = "/auth/deletekysymys/{id}", method = RequestMethod.GET)
 	public String deleteKysymys(@PathVariable("id") Long kysid, Model model) {
 		kysrepository.deleteById(kysid);
-		return "redirect:../auth/kysely";
+		return "redirect:../kysely";
 	}
 
 }
