@@ -31,6 +31,7 @@
 			<td><a th:href="@{/auth/addkysymys/{id}(id=${kysely.kyselyId})}">Lisää
 					kysymys</a>
 			<td><a th:href="@{/auth/questions/{id}(id=${kysely.kyselyId})}">Kysymykset</a>
+			<td sec:authorize="hasAuthority('ADMIN')"><a th:href="@{/deletekysely/{id}(id=${kysely.kyselyId})}">Poista kysely</a></td>
 		</tr>
 	</table>
 </body>
