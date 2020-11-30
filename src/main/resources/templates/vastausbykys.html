@@ -21,16 +21,24 @@
 	<table>
 		<tr>
 			<th>Id</th>
-			<th>Vastaus</th>
+			<th>Vaihtoehto</th>
+			<th>Vastauksien määrä</th>
 		
 		</tr>
-		<tr th:each="vastaus : ${answers}">
-			<td th:text="${vastaus.vastid}">Id</td>
-			<td th:text="${vastaus.vast}">Vastaus</td>
+<!-- 		<tr th:each="vastaus : ${answers}"> -->
+<!-- 			<td th:text="${vastaus.vastid}">Id</td> -->
+<!-- 			<td th:text="${vastaus.vast}">Vastaus</td> -->
 		
+<!-- 		</tr> -->
+		<tr th:each="vaihtoehto : ${vaihtoehdot}">
+			<td th:text="${vaihtoehto.veId}">Id</td>
+			<td th:text="${vaihtoehto.vaihtoehtoja}">Vaihtoehto</td>
+		
+			
+			
 		</tr>
+	
 	</table>
 </body>
 </html>
-	</body>
-	</html>
+	

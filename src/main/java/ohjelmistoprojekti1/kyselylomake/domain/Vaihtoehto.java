@@ -40,8 +40,7 @@ public class Vaihtoehto {
 		super();
 	
 	}
-
-
+	
 	public Vaihtoehto(String vaihtoehtoja, Kysymys kysymys) {
 		super();
 		this.vaihtoehtoja = vaihtoehtoja;
