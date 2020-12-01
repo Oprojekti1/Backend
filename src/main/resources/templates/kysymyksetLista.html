@@ -28,7 +28,8 @@
 
 			<th>Vastaukset</th>
 
-			<th>Poista kysymys<th>
+			<th>Poista kysymys</th>
+			<th>Muokkaa kysymystä</th>
 
 		</tr>
 		<tr th:each="kysymys : ${kysymykset}">
@@ -36,14 +37,15 @@
 			<td th:text="${kysymys.kys}">Nimi</td>
 			<td th:text="${kysymys.kysymystyyppi}">Kuvaus</td>
 			<td><a th:href="@{/auth/addvaihto/{id}(id=${kysymys.kysid})}">Lisää
-					Vaihtoehto</a>
+					Vaihtoehto</a></td>
 			<td><a th:href="@{/auth/vaihtikset/{id}(id=${kysymys.kysid})}">Näytä
-					Vaihtoehdot</a>
+					Vaihtoehdot</a></td>
 
 					<td><a th:href="@{/auth/answersbykys/{id}(id=${kysymys.kysid})}">Näytä
-					Vastaukset</a>
+					Vastaukset</a></td>
 
-					<td><a th:href="@{/auth/deletekysymys/{id}(id=${kysymys.kysid})}">Poista kysymys</a></td>
+					<td><a th:href="@{/auth/deletekysymys/{id}(id=${kysymys.kysid})}">Poista</a></td>
+						<td><a th:href="@{/auth/editkys/{id}(id=${kysymys.kysid})}">Muokkaa</a></td>
 						<!-- Kun endpointtiin lisätään /auth ei tarvitse käyttää sec:authorize -->
 <!-- 		    <td sec:authorize="hasAuthority('ADMIN')"><a th:href="@{/deletekysymys/{id}(id=${kysymys.kysid})}">Poista kysymys</a></td> -->
 		</tr>

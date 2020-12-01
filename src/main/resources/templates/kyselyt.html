@@ -27,19 +27,23 @@
 			<th>Lisää Kysymyksiä</th>
 			<th>Kysymykset</th>
 
-			<th>Vastaukset</th>
+	
 
 			<th>Poista kysely</th>
+				<th>Muokkaa kyselyä</th>
 		</tr>
 		<tr th:each="kysely : ${kyselyt}">
 			<td th:text="${kysely.kyselyId}">ID</td>
 			<td th:text="${kysely.nimi}">Nimi</td>
 			<td><a th:href="@{/auth/addkysymys/{id}(id=${kysely.kyselyId})}">Lisää
-					kysymys</a>
-			<td><a th:href="@{/auth/questions/{id}(id=${kysely.kyselyId})}">Kysymykset</a>
+					kysymys</a></td>
+			<td><a th:href="@{/auth/questions/{id}(id=${kysely.kyselyId})}">Kysymykset</a></td>
 				<td><a
 				th:href="@{/auth/deletekysely/{id}(id=${kysely.kyselyId})}">Poista
-					kysely</a></td>
+					</a></td>
+						<td><a
+				th:href="@{/auth/editkysely/{id}(id=${kysely.kyselyId})}">Muokkaa
+					</a></td>
 					<!-- Kun endpointtiin lisätään /auth ei tarvitse käyttää sec:authorize -->
 <!-- 			<td sec:authorize="hasAuthority('ADMIN')"><a th:href="@{/deletekysely/{id}(id=${kysely.kyselyId})}">Poista kysely</a></td> -->
 		

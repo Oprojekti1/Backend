@@ -205,6 +205,30 @@ public class HtmlController {
 		return "redirect:../kysely";
 	}
 	
+	// Kyselyn muokkaus
+
+	@RequestMapping(value = "/auth/editkysely/{id}", method = RequestMethod.GET)
+	@PreAuthorize("hasAnyAuthority('ADMIN')")
+	public String editKysely(@PathVariable("id") Long kyselyId, Model model) {
+		Kysely kysely = kyselyRepository.findById(kyselyId).get();
+		model.addAttribute("kysely", kysely);
+		return "editkysely";
+	}
+
+	// Kyselyn edit-version tallennus
+
+	@RequestMapping(value = "/auth/saveeditkysely", method = RequestMethod.POST)
+	@PreAuthorize("hasAnyAuthority('ADMIN')")
+	public String saveEditedKysely(@Valid @ModelAttribute Kysely kysely, BindingResult bindingResult, Model model) {
+		if (bindingResult.hasErrors()) { // Jos tulee virheitä
+			return "editkysely";
+		} else { // Jos kaikki menee oikein
+			kyselyRepository.save(kysely);
+			model.addAttribute("kysely", kysely);
+			return "redirect:kysely";
+		}
+	}
+	
 	// Kysymyksen poisto, lisätty /auth endpointtiin
 	@PreAuthorize("hasAuthority('ADMIN')")
 	@RequestMapping(value = "/auth/deletekysymys/{id}", method = RequestMethod.GET)
@@ -212,5 +236,28 @@ public class HtmlController {
 		kysrepository.deleteById(kysid);
 		return "redirect:../kysely";
 	}
+	// Kysymyksen editointi
+
+		@RequestMapping(value = "/auth/editkys/{id}", method = RequestMethod.GET)
+		@PreAuthorize("hasAnyAuthority('ADMIN')")
+		public String editKys(@PathVariable("id") Long kysid, Model model) {
+		Kysymys kysymys = kysrepository.findById(kysid).get();
+			model.addAttribute("kysymys", kysymys);
+		
+			return "editkys";
+		}
+		@RequestMapping(value = "/auth/saveeditkys", method = RequestMethod.POST)
+		public String saveEditedKys(@Valid @ModelAttribute Kysymys kysymys, BindingResult bindingResult, Model model) {
+			if (bindingResult.hasErrors()) {	// Jos tulee virheitä
+				model.addAttribute("kysymys", kysymys);
+			
+				return "editkys";
+			} else {		// Jos kaikki menee oikein
+				kysrepository.save(kysymys);
+				model.addAttribute("kysymys", kysymys);
+				
+				return "redirect:/auth/kysely";
+			}
+		}
 
 }
