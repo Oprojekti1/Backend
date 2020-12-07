@@ -24,6 +24,7 @@
 		<tr>
 			<th>ID</th>
 			<th>Nimi</th>
+			<th>Kuvaus</th>
 			<th>Lisää Kysymyksiä</th>
 			<th>Kysymykset</th>
 
@@ -35,6 +36,7 @@
 		<tr th:each="kysely : ${kyselyt}">
 			<td th:text="${kysely.kyselyId}">ID</td>
 			<td th:text="${kysely.nimi}">Nimi</td>
+			<td th:text="${kysely.intro}">Kuvaus</td>
 			<td><a th:href="@{/auth/addkysymys/{id}(id=${kysely.kyselyId})}">Lisää
 					kysymys</a></td>
 			<td><a th:href="@{/auth/questions/{id}(id=${kysely.kyselyId})}">Kysymykset</a></td>

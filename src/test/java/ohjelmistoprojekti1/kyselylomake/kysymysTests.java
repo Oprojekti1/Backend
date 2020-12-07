@@ -23,9 +23,9 @@ public class kysymysTests {
 	
 	@Test
 	public void kysymysOnLuotavissa() {
-		Kysely kysely = new Kysely("Ensinmmäinen");
+		Kysely kysely = new Kysely("Ensinmmäinen", "testi");
 		krepo.save(kysely);
-		Kysymys k1 = new Kysymys("Mikä on sukupuolesi?", Kysymystyyppi.radiokysymys, kysely);
+		Kysymys k1 = new Kysymys("Mikä on sukupuolesi?", Kysymystyyppi.radio, kysely);
 		assertEquals(k1.getKys(), "Mikä on sukupuolesi?");
 	}
 }
