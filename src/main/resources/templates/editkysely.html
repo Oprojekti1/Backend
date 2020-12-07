@@ -1,3 +1,4 @@
+
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
@@ -8,30 +9,27 @@
 </head>
 <body>
 	<header>
-		<h1>Lisää Kysely</h1>
+		<h1>Muokkaa Kyselyä</h1>
 	</header>
 	<div class="topnav">
 		<a class="active" href="/login">Kirjaudu ulos</a>
 	</div>
 	<div class="container">
-		<form th:object="${kysely}" th:action="@{save}" action="#"
+	
+		<form th:object="${kysely}" th:action="@{/auth/saveeditkysely}" action="#"
 			method="post">
 			<br>
+			<div>
+			<input type="hidden" th:field="${kysely.kyselyId}" />
+			</div>
 			<div>
 				<p th:if="${#fields.hasErrors('nimi')}" th:errors="*{nimi}">Error</p>
 				<label for="nimi">Nimi:</label> <input type="text"
 					th:field="*{nimi}" placeholder="Anna nimi" />
 			</div>
-		
-				<div>
-				<p th:if="${#fields.hasErrors('intro')}" th:errors="*{intro}">Error</p>
-				<label for="intro">Kuvaus:</label> <input type="text"
-					th:field="*{intro}" placeholder="Anna kuvaus" />
-			</div>
 			<br>
 			<button type="submit">Tallenna</button>
 			<a href="/auth/kysely" class="button">Peruuta</a> <br>
-			
 		</form>
 	</div>
 </body>

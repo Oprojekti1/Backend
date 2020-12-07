@@ -46,7 +46,7 @@ public class Kysymys {
 	} // lisätty RL
 
 	public enum Kysymystyyppi {
-		radiokysymys, avoin
+		radio, avoin
 	}
 
 	public Kysymys(Long kysid, String kys, Kysymystyyppi kysymystyyppi, Kysely kysely) {

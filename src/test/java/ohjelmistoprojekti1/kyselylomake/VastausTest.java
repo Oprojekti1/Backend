@@ -34,9 +34,9 @@ public class VastausTest {
 	
 	@Test
 	public void vastausOnLuotavissa() {
-		Kysely kysely = new Kysely("Ensinmmäinen");
+		Kysely kysely = new Kysely("Ensinmmäinen", "testi");
 		krepo.save(kysely);
-		Kysymys k1 = new Kysymys("Mikä on sukupuolesi?", Kysymystyyppi.radiokysymys, kysely);
+		Kysymys k1 = new Kysymys("Mikä on sukupuolesi?", Kysymystyyppi.radio, kysely);
 		Vastaus v2 = new Vastaus("Mies", k1);
 		assertThat(v2.getVast().contains("Mies"));
 	}

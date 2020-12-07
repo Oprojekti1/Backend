@@ -34,12 +34,12 @@ public class KyselylomakeApplication {
 			//logitusrivejä bugien metsästyksen avuksi
 			log.info("Tallenna kysely");
 			//luodaan kyselyrepositorio jonne tallennetaan kyselyitä jotka jokainen voivat sisältäää useita kysymyksiä
-			Kysely kysely = new Kysely("Ensinmmäinen");
+			Kysely kysely = new Kysely("Ensinmmäinen", "Tässä kyselään sukupuoli tietoja, harrastuksia ja muita mielenkiinnon kohteita");
 			kyselyRepository.save(kysely);
 			
 			log.info("Tallenna kysymyksiä");
 			//luodaan pari kysymystä joista ensimmäisen tyyppi on radiobutton ja toisen avoin vastauskenttä ja tallennetaan ne kysymys repositorioon
-			Kysymys k1 = new Kysymys("Mikä on sukupuolesi?", Kysymystyyppi.radiokysymys, kysely);
+			Kysymys k1 = new Kysymys("Mikä on sukupuolesi?", Kysymystyyppi.radio, kysely);
 			Kysymys k2 = new Kysymys("Mitä teet vapaa-ajallasi", Kysymystyyppi.avoin, kysely);
 			krepository.save(k2);
 			krepository.save(k1);
