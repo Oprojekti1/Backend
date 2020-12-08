@@ -25,7 +25,7 @@ public class Kysely {
 	@NotEmpty(message = "Nimi ei saa olla tyhjä!")
 	@Size(min = 4, max = 30, message = "Nimen pitää olla 4-30 merkkiä pitkä!")
 	private String nimi;
-	@NotEmpty(message = "Nimi ei saa olla tyhjä!")
+	@NotEmpty(message = "Kuvaus ei saa olla tyhjä!")
 	@Size(min = 4, max = 120, message = "Kuvauksen pitää olla 4-30 merkkiä pitkä!")
 	private String intro;
 	// luodaan kyselyyn lista kysymyksistä, tai siis luodaan tietokantayhteys joka

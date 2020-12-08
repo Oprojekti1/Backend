@@ -27,6 +27,11 @@
 				<label for="nimi">Nimi:</label> <input type="text"
 					th:field="*{nimi}" placeholder="Anna nimi" />
 			</div>
+					<div>
+				<p th:if="${#fields.hasErrors('intro')}" th:errors="*{intro}">Error</p>
+				<label for="intro">Kuvaus:</label> <input type="text"
+					th:field="*{intro}" placeholder="Anna kuvaus" />
+			</div>
 			<br>
 			<button type="submit">Tallenna</button>
 			<a href="/auth/kysely" class="button">Peruuta</a> <br>

@@ -87,10 +87,9 @@ public class HtmlController {
 	@RequestMapping("/auth/kysely")
 	@PreAuthorize("hasAnyAuthority('ADMIN')")
 	public String KyselyLista(Model model) {
-//		List<Vastaus> vastaukset = (List<Vastaus>) vastausRepository.findAll();
-//		model.addAttribute("vastaukset", vastaukset);
-	//	LinkedService ls = new LinkedService();
-		
+		List<Vastaus> vastaukset = (List<Vastaus>) vastausRepository.findAll();
+		LinkedService.getVastausksienMaara(vastaukset);
+		model.addAttribute("vastaukset", vastaukset);
 		model.addAttribute("kyselyt", kyselyRepository.findAll());
 
 		return "kyselyt";

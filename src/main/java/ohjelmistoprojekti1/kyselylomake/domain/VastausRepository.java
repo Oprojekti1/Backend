@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 public interface VastausRepository extends CrudRepository<Vastaus, Long> {
 Vastaus findByvast(String vast);
 Vastaus findByVastid(Long vastid);//tämä lisätty
-long countByvast(String vast);
+
 
 
 

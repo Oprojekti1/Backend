@@ -8,17 +8,24 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 
 public class LinkedService {
-	@Autowired
-	private static VastausRepository vastausRepository;
 
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-		List<Vastaus> vastaukset = new LinkedList<>((List<Vastaus>) vastausRepository.findAll());
-		
-		for (int i = 0; i < vastaukset.size(); i ++) {
-			System.out.println("HALLOOOOOO" + vastaukset.get(i));
-		}
-	
+
+	public static  Map<Vastaus, Integer> getVastausksienMaara(List<Vastaus> vastaukset) {
+
+	Map<Vastaus, Integer> tulokset = laskeEsiintymat(vastaukset);
+	System.out.println("HALLOOOOOO" + tulokset);
+	return tulokset;
 	}
 
+	 private static <T> Map<T, Integer> laskeEsiintymat(List<T> list) {
+	        Map<T, Integer> tulos = new HashMap<>();
+	        for (T object : list) {
+	            if (tulos.containsKey(object)) {
+	                tulos.put(object, tulos.get(object) + 1);
+	            } else {
+	                tulos.put(object, 1);
+	            }
+	        }
+	        return tulos;
+	    }
 }

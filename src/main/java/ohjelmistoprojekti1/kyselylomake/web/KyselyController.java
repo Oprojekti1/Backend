@@ -43,7 +43,6 @@ public class KyselyController {
 
 	// Restful service to get question by id
 	@RequestMapping(value = "/kysymykset/{kysid}", method = RequestMethod.GET)
-
 	public @ResponseBody Optional<Kysymys> findKysRest(@PathVariable("kysid") Long kysid) {
 		return kysrepository.findById(kysid);
 	}
@@ -56,15 +55,12 @@ public class KyselyController {
 
 	// Restful service haetaan kysely
 	@RequestMapping(value = "/kyselyt", method = RequestMethod.GET)
-
 	public @ResponseBody List<Kysely> kyselyListRest() {
 		return (List<Kysely>) kyselyRepository.findAll();
 	}
 
-	@RequestMapping(value = "/kyselyt/{kyselyId}", method = RequestMethod.GET)
-
+	@RequestMapping(value = "/kysely/{kyselyId}", method = RequestMethod.GET)
 	public @ResponseBody Optional<Kysely> findKyselyRest(@PathVariable("kyselyId") Long kyselyId) {
-
 		System.out.println(kyselyRepository.findById(kyselyId));
 		return kyselyRepository.findById(kyselyId);
 
