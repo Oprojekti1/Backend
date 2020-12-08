@@ -67,19 +67,17 @@ public class HtmlController {
 	public String vastauksetkys(@PathVariable("id") Long kysId, Model model) {
 		Kysymys kysymys= kysrepository.findById(kysId).get();
 		List<Vastaus> answers = kysymys.getVastaukset();
-		
-	//	long total = answers.stream().distinct().count();
-		
-//		for (Vaihtoehto vaihtoehto : kysymys.getVaihtoehdot()) {
-//			System.out.println(vaihtoehto);
-//			for (Vaihtoehto vaihtoehto : kysymys.getVaihtoehdot()) {
-//				System.out.println(vaihtoehto);
-//				
-//			}
-//		}
 		model.addAttribute("vaihtoehdot", kysymys.getVaihtoehdot());
 		model.addAttribute("answers", answers);
 		return "vastausbykys";
+		
+//		Kysymys kysymys= kysrepository.findById(kysId).get();
+//		List<Vastaus> answers = kysymys.getVastaukset();
+//		 answers = (List<Vastaus>) vastausRepository.findAll();
+//		LinkedService.getVastausksienMaara(answers);
+//	
+//		model.addAttribute("vaihtoehdot", kysymys.getVaihtoehdot());
+//		model.addAttribute("answers", answers.size());
 
 	}
 
@@ -89,7 +87,7 @@ public class HtmlController {
 	public String KyselyLista(Model model) {
 		List<Vastaus> vastaukset = (List<Vastaus>) vastausRepository.findAll();
 		LinkedService.getVastausksienMaara(vastaukset);
-		model.addAttribute("vastaukset", vastaukset);
+		model.addAttribute("vastaukset", vastaukset.size());
 		model.addAttribute("kyselyt", kyselyRepository.findAll());
 
 		return "kyselyt";
