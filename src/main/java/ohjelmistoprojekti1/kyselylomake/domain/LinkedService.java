@@ -5,27 +5,33 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
-import org.springframework.beans.factory.annotation.Autowired;
+
 
 public class LinkedService {
 
 
-	public static  Map<Vastaus, Integer> getVastausksienMaara(List<Vastaus> vastaukset) {
+	public static  Map<String, Integer> getVastausksienMaara(List<Vastaus> vastaukset) {
+		
+	
 
-	Map<Vastaus, Integer> tulokset = laskeEsiintymat(vastaukset);
-	System.out.println("HALLOOOOOO" + tulokset);
+	Map<String, Integer> tulokset = laskeEsiintymat(vastaukset); // Key = Vastaus, Integer = value
+	
+	System.out.println("HALLOOOOOO" + " " + tulokset.values().size());
 	return tulokset;
 	}
 
-	 private static <T> Map<T, Integer> laskeEsiintymat(List<T> list) {
-	        Map<T, Integer> tulos = new HashMap<>();
-	        for (T object : list) {
-	            if (tulos.containsKey(object)) {
-	                tulos.put(object, tulos.get(object) + 1);
+	 private static  Map<String, Integer> laskeEsiintymat(List<Vastaus> list) {  // The T type indicates that it can refer to any type
+	        Map<String, Integer> tulos = new HashMap<>();
+	        for (Vastaus vastaus : list) {
+	            if (tulos.containsKey(vastaus.getVast())) {	//Containskey =  Returns true if this map contains a mapping for the specified key. // vaihda get kyselyid
+	                tulos.put(vastaus.getVast(), tulos.get(vastaus.getVast()) + 1);
 	            } else {
-	                tulos.put(object, 1);
+	                tulos.put(vastaus.getVast(), 1);
 	            }
 	        }
 	        return tulos;
 	    }
+	 
+
+	
 }

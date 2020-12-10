@@ -87,6 +87,8 @@ public class HtmlController {
 	public String KyselyLista(Model model) {
 		List<Vastaus> vastaukset = (List<Vastaus>) vastausRepository.findAll();
 		LinkedService.getVastausksienMaara(vastaukset);
+		System.out.println(	LinkedService.getVastausksienMaara(vastaukset));
+
 		model.addAttribute("vastaukset", vastaukset.size());
 		model.addAttribute("kyselyt", kyselyRepository.findAll());
 
