@@ -43,7 +43,7 @@
 			</a></td>
 			<td><a th:href="@{/auth/editkysely/{id}(id=${kysely.kyselyId})}">Muokkaa
 			</a></td>
-					<td th:text="${vastaukset}">Määrä</td>
+					<td th:text="${vastaukset}" >Määrä</td>
 			<!-- Kun endpointtiin lisätään /auth ei tarvitse käyttää sec:authorize -->
 			<!-- 			<td sec:authorize="hasAuthority('ADMIN')"><a th:href="@{/deletekysely/{id}(id=${kysely.kyselyId})}">Poista kysely</a></td> -->
 
