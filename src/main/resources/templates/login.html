@@ -1,0 +1,30 @@
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="../styles/signandlogin.css"
+	th:ref="@{/styles/signandlogin.css}" type="text/css" rel="stylesheet" />
+</head>
+<body>
+	<header class="header">
+		<h1>Kirjaudu sisään!</h1>
+	</header>
+	<br>
+	<div>
+		<div th:if="${param.error}">Virheellinen käyttäjänimi ja
+			salasana.</div>
+		<form th:action="@{/login}" method="post">
+			<div class="container">
+				<label>Käyttäjänimi: <input type="text" name="username"
+					placeholder="Käyttäjänimi" /></label> <br> <label>Salasana: <input
+					name="password" type="password" placeholder="Salasana" /></label>
+				<button type="submit">Kirjaudu sisään</button>
+				<a href="/signup" class="button">Rekisteröidy</a> <br>
+			</div>
+		</form>
+	</div>
+</body>
+</html>

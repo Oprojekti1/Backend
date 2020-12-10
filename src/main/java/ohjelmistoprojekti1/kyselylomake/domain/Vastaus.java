@@ -15,6 +15,7 @@ public class Vastaus {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long vastid;
 	private String vast;
+	
 
 	@JsonBackReference
 	@ManyToOne

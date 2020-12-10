@@ -6,7 +6,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface VaihtoehtoRepository extends CrudRepository <Vaihtoehto, Long>{
 	
-	Vaihtoehto findByVaihtoehto(String vaihtoehto);
+	Vaihtoehto findByVaihtoehtoja(String vaihtoehtoja);
 	Vaihtoehto findByveId(Long veId);
 
 }

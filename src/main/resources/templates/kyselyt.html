@@ -1,0 +1,56 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Kyselyt</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link href="../styles/home.css" th:ref="@{/styles/home.css}"
+	type="text/css" rel="stylesheet" />
+</head>
+<body>
+	<header>
+		<h1>Tervetuloa etusivulle</h1>
+	</header>
+	<div class="topnav">
+		<a class="active" href="/auth/add">Lisää kysely</a> <a class="active"
+			href="/vastauslista">Vastaukset</a> <a class="active" href="/login">Kirjaudu
+			ulos</a>
+	</div>
+	<br>
+	<header>
+		<h2>Vaihtoehtojen lisäys tapahtuu kysymys listauksessa, siellä
+			löytyy myös vaihtoehtolistaus</h2>
+	</header>
+	<table>
+		<tr>
+			<th>ID</th>
+			<th>Nimi</th>
+			<th>Kuvaus</th>
+			<th>Lisää Kysymyksiä</th>
+			<th>Kysymykset</th>
+			<th>Poista kysely</th>
+			<th>Muokkaa kyselyä</th>
+			<th>Vastauksien määrä</th>
+		</tr>
+		<tr th:each="kysely : ${kyselyt}">
+			<td th:text="${kysely.kyselyId}">ID</td>
+			<td th:text="${kysely.nimi}">Nimi</td>
+			<td th:text="${kysely.intro}">Kuvaus</td>
+			<td><a th:href="@{/auth/addkysymys/{id}(id=${kysely.kyselyId})}">Lisää
+					kysymys</a></td>
+			<td><a th:href="@{/auth/questions/{id}(id=${kysely.kyselyId})}">Kysymykset</a></td>
+			<td><a
+				th:href="@{/auth/deletekysely/{id}(id=${kysely.kyselyId})}">Poista
+			</a></td>
+			<td><a th:href="@{/auth/editkysely/{id}(id=${kysely.kyselyId})}">Muokkaa
+			</a></td>
+					<td th:text="${vastaukset}" >Määrä</td>
+			<!-- Kun endpointtiin lisätään /auth ei tarvitse käyttää sec:authorize -->
+			<!-- 			<td sec:authorize="hasAuthority('ADMIN')"><a th:href="@{/deletekysely/{id}(id=${kysely.kyselyId})}">Poista kysely</a></td> -->
+
+		</tr>
+<!-- 				<tr th:each="vastaus : ${vastaukset}"> -->
+<!-- 				<td th:text="${vastaukset}">Määrä</td> -->
+<!-- 				</tr> -->
+	</table>
+</body>
+</html>
