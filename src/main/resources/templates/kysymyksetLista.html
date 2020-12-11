@@ -18,6 +18,10 @@
 			href="/login">Kirjaudu ulos</a>
 	</div>
 	<br>
+	<header>
+		<h3 th:text="'Kaikkien vastausten määrä: ' + ${maara}"></h3>
+	</header>
+	<br>
 	<table>
 		<tr>
 			<th>Id</th>
@@ -25,12 +29,10 @@
 			<th>Kysymystyyppi</th>
 			<th>Lisää vaihtoehto</th>
 			<th>Vaihtoehdot</th>
-
 			<th>Vastaukset</th>
-
+			<th>Vastauksien määrä</th>
 			<th>Poista kysymys</th>
 			<th>Muokkaa kysymystä</th>
-
 		</tr>
 		<tr th:each="kysymys : ${kysymykset}">
 			<td th:text="${kysymys.kysid}">Id</td>
@@ -38,17 +40,14 @@
 			<td th:text="${kysymys.kysymystyyppi}">Kuvaus</td>
 			<td><a th:href="@{/auth/addvaihto/{id}(id=${kysymys.kysid})}">Lisää
 					Vaihtoehto</a></td>
-			<td><a th:href="@{/auth/vaihtikset/{id}(id=${kysymys.kysid})}">Näytä
+			<td><a th:href="@{/auth/vaihtikset/{id}(id=${kysymys.kysid})}">
 					Vaihtoehdot</a></td>
-
-					<td><a th:href="@{/auth/answersbykys/{id}(id=${kysymys.kysid})}">Näytä
+			<td><a th:href="@{/auth/answersbykys/{id}(id=${kysymys.kysid})}">
 					Vastaukset</a></td>
-
-
-					<td><a th:href="@{/auth/deletekysymys/{id}(id=${kysymys.kysid})}">Poista</a></td>
-						<td><a th:href="@{/auth/editkys/{id}(id=${kysymys.kysid})}">Muokkaa</a></td>
-						<!-- Kun endpointtiin lisätään /auth ei tarvitse käyttää sec:authorize -->
-<!-- 		    <td sec:authorize="hasAuthority('ADMIN')"><a th:href="@{/deletekysymys/{id}(id=${kysymys.kysid})}">Poista kysymys</a></td> -->
+			<td th:text="${#lists.size(kysymys.vastaukset)}">Määrät</td>
+			<td><a
+				th:href="@{/auth/deletekysymys/{id}(id=${kysymys.kysid})}">Poista</a></td>
+			<td><a th:href="@{/auth/editkys/{id}(id=${kysymys.kysid})}">Muokkaa</a></td>
 		</tr>
 	</table>
 </body>

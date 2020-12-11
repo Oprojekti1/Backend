@@ -36,7 +36,8 @@ public class LinkedService {
 			
 			Map<String, Integer> tulokset1 = vastauksetByKyselyId(vastauksetKysely); // Key = Vastaus, Integer = value
 			
-			System.out.println("TOIMISITKO JOOKOS KOOKOS" + " " + tulokset1.values().size());
+			System.out.println("TOIMISITKO JOOKOS KOOKOS" + " " + tulokset1.size());
+			tulokset1.size();
 			return tulokset1;
 			}
 
@@ -71,6 +72,8 @@ public class LinkedService {
 					                tulos2.put(vastaus.getKysymys().getKysid().toString(), 1);
 					            }
 					        }
+					        
+					
 					        return tulos2;
 					    }
 			 

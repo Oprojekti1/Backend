@@ -30,23 +30,20 @@ public class VastausController {
 	@Autowired
 	private KysymysRepository kysrepository;
 
-	// Restful service to get all vastaus
+	// Haetaan kaikki vastaukset
 	@RequestMapping(value = "/vastaukset", method = RequestMethod.GET)
-
 	public @ResponseBody List<Vastaus> vasListRest() {
 		return (List<Vastaus>) vastausRepository.findAll();
 	}
 
-	// Restful service to get vastaus by id
+	// Haetaan kaikki vastaukset id perusteella
 	@RequestMapping(value = "/vastaukset/{vastid}", method = RequestMethod.GET)
-
 	public @ResponseBody Vastaus findVastRest(@PathVariable("vastid") Long vastid) {
 		return vastausRepository.findByVastid(vastid);
 	}
 
-	// Restful service to save a new vastaus
+	// Tallennetaan uusi vastaus kysymys id perusteella
 	@RequestMapping(value = "/vastaus/{kysid}", method = RequestMethod.POST)
-
 	public @ResponseBody Vastaus saveVastRest(@PathVariable("kysid") Long kysid, @RequestBody Vastaus vastaus) {
 		Kysymys kysymys = kysrepository.findByKysid(kysid);
 		vastaus.setKysymys(kysymys);

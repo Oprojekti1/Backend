@@ -2,9 +2,12 @@ package ohjelmistoprojekti1.kyselylomake.domain;
 
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
+
 //tämäluokka määrittää kirjautumislomakkeen ja sille syötettävissä olevat tiedot ja niiden reunaehdot
 public class SignupForm {
-	//esimerkiksi käyttäjänimi on vähintään 4 merkkiä ja enintään 30 merkkiä pitkä. näytetään virheilmoitus jos syöte on väärä
+
+	// esimerkiksi käyttäjänimi on vähintään 4 merkkiä ja enintään 30 merkkiä pitkä.
+	// näytetään virheilmoitus jos syöte on väärä
 	@NotEmpty(message = "Käyttjänimi ei saa olla tyhjä!")
 	@Size(min = 4, max = 30, message = "Käyttäjänimen pitää olla 4-30 merkkiä pitkä!")
 	private String username = "";
@@ -18,7 +21,7 @@ public class SignupForm {
 	private String passwordCheck = "";
 
 	@NotEmpty
-	private String role = "ADMIN"; // eikö pitäisi olla admin?
+	private String role = "ADMIN"; // määritetty että aina kun rekisteröityy on rooli automaattisesti ylläpitäjä
 
 	public String getUsername() {
 		return username;

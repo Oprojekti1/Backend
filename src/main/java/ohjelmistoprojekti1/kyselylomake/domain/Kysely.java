@@ -16,18 +16,22 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 // kyselyluokka jossa luodaan useita kysymyksiä sisältävä kysely
 @Entity
 public class Kysely {
+
 	// automaattisesti generoitu yksilöivä tunnus jokaiselle kyselylle
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long kyselyId;
+
 	// luodaan kyselylle nimi ja määritellään sen pituudelle raja-arvot ja
 	// määritellään sen tyypiksi String
 	@NotEmpty(message = "Nimi ei saa olla tyhjä!")
 	@Size(min = 4, max = 30, message = "Nimen pitää olla 4-30 merkkiä pitkä!")
 	private String nimi;
+
 	@NotEmpty(message = "Kuvaus ei saa olla tyhjä!")
 	@Size(min = 4, max = 120, message = "Kuvauksen pitää olla 4-30 merkkiä pitkä!")
 	private String intro;
+
 	// luodaan kyselyyn lista kysymyksistä, tai siis luodaan tietokantayhteys joka
 	// yhdistää useita kysymyksiä sisältävän listan oskasi kyselyä
 	@JsonManagedReference
@@ -50,7 +54,7 @@ public class Kysely {
 
 	public Kysely() {
 		super();
-		// TODO Auto-generated constructor stub
+
 	}
 
 	public Long getKyselyId() {
@@ -89,7 +93,5 @@ public class Kysely {
 	public String toString() {
 		return "Kysely [kyselyId=" + kyselyId + ", nimi=" + nimi + ", intro=" + intro + "]";
 	}
-	
-	
 
 }

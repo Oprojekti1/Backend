@@ -18,30 +18,43 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 public class Kysymys {
-	//automaattisesti generoitu yksilöllinen id
+
+	// automaattisesti generoitu yksilöllinen id
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long kysid;
-	//luodaan kysymykselle nimi ja määritellään sen pituudelle raja-arvot ja määritellään sen tyypiksi String
+
+	// luodaan kysymykselle nimi ja määritellään sen pituudelle raja-arvot ja
+	// määritellään sen tyypiksi String
 	@NotEmpty(message = "Kysymys ei saa olla tyhjä!")
 	@Size(min = 4, max = 60, message = "Kysymyksen pitää olla 4-60 merkkiä pitkä!")
 	private String kys;
-	//luodaan kysymystyyppi joka on tyypiltään ENUM(joka selviää tutkimalla projektia)
+
+	// luodaan kysymystyyppi joka on tyypiltään ENUM(joka selviää tutkimalla
+	// projektia)
+	// kysymystyypillä voi määrittää kysymyksen tyypin esim. radio tai avoin teksti
 	private Kysymystyyppi kysymystyyppi;
-	//luodaan tietokantayhdeys taulujen kysymys ja vastaus välille siten että yksi kysymys voi sisältää monta vastausta
+
+	// luodaan tietokantayhdeys taulujen kysymys ja vastaus välille siten että yksi
+	// kysymys voi sisältää monta vastausta
 	@JsonManagedReference
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "kysymys")
 	private List<Vastaus> vastaukset;
-	//luodaan tietokantayhdeys taulujen kysymys ja vaihtoehto välille siten että yksi kysymys voi sisältää monta vaihtoehtoa
+
+	// luodaan tietokantayhdeys taulujen kysymys ja vaihtoehto välille siten että
+	// yksi kysymys voi sisältää monta vaihtoehtoa
 	@JsonManagedReference
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "kysymys")
 	private List<Vaihtoehto> vaihtoehdot;
-	//luodaan tietokantayhdeys taulujen kysely ja kysymys välille siten että yksi kysely voi sisältää monta kysymystä
+
+	// luodaan tietokantayhdeys taulujen kysely ja kysymys välille siten että yksi
+	// kysely voi sisältää monta kysymystä
 	@JsonBackReference
 	@ManyToOne
 	@JoinColumn(name = "kyselyId")
 	private Kysely kysely;
-	//konstruktorit ja ENUM kysymystyyppi
+
+	// konstruktorit ja ENUM kysymystyyppi
 	public Kysymys() {
 	} // lisätty RL
 
@@ -63,7 +76,8 @@ public class Kysymys {
 		this.kysymystyyppi = kysymystyyppi;
 		this.kysely = kysely;
 	}
-	//getterit ja setterit
+
+	// getterit ja setterit
 	public Long getKysid() {
 		return kysid;
 	}

@@ -19,15 +19,16 @@ import ohjelmistoprojekti1.kyselylomake.domain.Kysely;
 import ohjelmistoprojekti1.kyselylomake.domain.KyselyRepository;
 import ohjelmistoprojekti1.kyselylomake.domain.Kysymys;
 import ohjelmistoprojekti1.kyselylomake.domain.KysymysRepository;
-import ohjelmistoprojekti1.kyselylomake.domain.LinkedService;
+
 import ohjelmistoprojekti1.kyselylomake.domain.Vaihtoehto;
 import ohjelmistoprojekti1.kyselylomake.domain.VaihtoehtoRepository;
 import ohjelmistoprojekti1.kyselylomake.domain.Vastaus;
 import ohjelmistoprojekti1.kyselylomake.domain.VastausRepository;
+import ohjelmistoprojekti1.kyselylomake.domain.Kysymys.Kysymystyyppi;
 
 @Controller
 @CrossOrigin
-public class HtmlController {
+public class HtmlController { // Tässä löytyy kaikkien luokkien endpointit thymeleafille
 
 	@Autowired
 	private VastausRepository vastausRepository;
@@ -41,6 +42,8 @@ public class HtmlController {
 	@Autowired
 	private VaihtoehtoRepository veRepository;
 
+// Aloitetaan vastauksista
+
 	@RequestMapping(value = "/vastauslista", method = RequestMethod.GET)
 	public String showVastaukset(Model model) {
 		List<Vastaus> vastaukset = (List<Vastaus>) vastausRepository.findAll();
@@ -49,59 +52,35 @@ public class HtmlController {
 		return "vastaus";
 	}
 
-	// Vastaukset kysely id mukaan:
-//
-//	@RequestMapping(value = "/auth/answersbykysely/{id}", method = RequestMethod.GET)
-//	@PreAuthorize("hasAnyAuthority('ADMIN')")
-//	public String vastauksetKysely(@PathVariable("id") Long kyselyId, Model model) {
-//		Kysely kysely = kyselyRepository.findById(kyselyId).get();
-//		kysely.getKysymykset();
-//		List<Vastaus> answers;
-//		LinkedService.getVastauksetKyselynIdMukaan(answers);
-//		model.addAttribute("answers", answers);
-//		return "vastauksetbykysely";
-//
-//	}
-
 	// Vastaukset kysymys id mukaan:
 	@RequestMapping(value = "/auth/answersbykys/{id}", method = RequestMethod.GET)
 	@PreAuthorize("hasAnyAuthority('ADMIN')")
 	public String vastauksetkys(@PathVariable("id") Long kysId, Model model) {
 		Kysymys kysymys = kysrepository.findById(kysId).get();
-		List<Vastaus> answers = kysymys.getVastaukset();
-		LinkedService.getVastauksetKysIdMukaan(answers);
-		// If lause joka katsoo matchaako vastaus vaihtoehtoa?
-		// Miten saadaan piilotettua kysid vastauksesta?
-		
+		List<Vastaus> vast = kysymys.getVastaukset();
+		model.addAttribute("vast", vast);
 		model.addAttribute("vaihtoehdot", kysymys.getVaihtoehdot());
-		model.addAttribute("answers",LinkedService.getVastauksetKysIdMukaan(answers));
+		// If lauseella katsotaan löytyykö vaihtoehtoja riippuen kysymystyypistä
+		// Jos kysymystyypillä ei ole vaihtoehtoja, on sille oma html file
+		if (kysymys.getKysymystyyppi() == Kysymystyyppi.avoin) {
+			return "avoinkys"; // tässä ei ole vaihtoehtoja
+		} else if (kysymys.getKysymystyyppi() == Kysymystyyppi.radio) {
+			return "vastausbykys"; // tässä löytyy vaihtoehdot
+		}
 		return "vastausbykys";
-
-//		Kysymys kysymys= kysrepository.findById(kysId).get();
-//		List<Vastaus> answers = kysymys.getVastaukset();
-//		 answers = (List<Vastaus>) vastausRepository.findAll();
-//		LinkedService.getVastausksienMaara(answers);
-//	
-//		model.addAttribute("vaihtoehdot", kysymys.getVaihtoehdot());
-//		model.addAttribute("answers", answers.size());
-
 	}
 
-// Kaikki kyselyt
+// Jatketaan kyselyillä
+
+	// Kaikki kyselyt
 	@RequestMapping("/auth/kysely")
 	@PreAuthorize("hasAnyAuthority('ADMIN')")
 	public String KyselyLista(Model model) {
-		List<Vastaus> vastaukset = (List<Vastaus>) vastausRepository.findAll();
-//		LinkedService.getVastauksetKyselynIdMukaan(vastaukset);
-//		System.out.println(LinkedService.getVastauksetKyselynIdMukaan(vastaukset));
-//
-		model.addAttribute("vastaukset", vastaukset);
 		model.addAttribute("kyselyt", kyselyRepository.findAll());
-
 		return "kyselyt";
 	}
 
-// Kyselyn lisäys
+	// Kyselyn lisäys
 	@RequestMapping(value = "/auth/add")
 	@PreAuthorize("hasAnyAuthority('ADMIN')")
 	public String addKysely(Model model) {
@@ -109,7 +88,7 @@ public class HtmlController {
 		return "addkysely";
 	}
 
-// Kyselyn tallennus
+	// Kyselyn tallennus
 	@RequestMapping(value = "/auth/save", method = RequestMethod.POST)
 	@PreAuthorize("hasAnyAuthority('ADMIN')")
 	public String save(@Valid @ModelAttribute Kysely kysely, BindingResult bindingResult, Model model) {
@@ -124,7 +103,7 @@ public class HtmlController {
 
 	}
 
-// Kyselyn poisto, lisätty /auth endpointtiin
+	// Kyselyn poisto, lisätty /auth endpointtiin
 	@PreAuthorize("hasAuthority('ADMIN')")
 	@RequestMapping(value = "/auth/deletekysely/{id}", method = RequestMethod.GET)
 	public String deleteKysely(@PathVariable("id") Long KyselyId, Model model) {
@@ -132,7 +111,7 @@ public class HtmlController {
 		return "redirect:../kysely";
 	}
 
-// Kyselyn muokkaus
+	// Kyselyn muokkaus
 	@RequestMapping(value = "/auth/editkysely/{id}", method = RequestMethod.GET)
 	@PreAuthorize("hasAnyAuthority('ADMIN')")
 	public String editKysely(@PathVariable("id") Long kyselyId, Model model) {
@@ -141,7 +120,7 @@ public class HtmlController {
 		return "editkysely";
 	}
 
-// Kyselyn edit-version tallennus
+	// Kyselyn edit-version tallennus
 	@RequestMapping(value = "/auth/saveeditkysely", method = RequestMethod.POST)
 	@PreAuthorize("hasAnyAuthority('ADMIN')")
 	public String saveEditedKysely(@Valid @ModelAttribute Kysely kysely, BindingResult bindingResult, Model model) {
@@ -154,7 +133,26 @@ public class HtmlController {
 		}
 	}
 
-// Kysymysten lisäys
+// Seuraavana kysymykset
+
+	// Kaikki kysymykset
+	// Kysymykset haetaan kysely id perusteella
+	@RequestMapping(value = "/auth/questions/{id}", method = RequestMethod.GET)
+	@PreAuthorize("hasAnyAuthority('ADMIN')")
+	public String kyssarit(@PathVariable("id") Long kyselyId, Model model) {
+		Kysely kysely = kyselyRepository.findById(kyselyId).get();
+		int vastaustenMaara = 0;
+		for (int i = 0; i < kysely.getKysymykset().size(); i++) {
+			System.out.println(kysely.getKysymykset().get(i).getVastaukset().size());
+			vastaustenMaara += kysely.getKysymykset().get(i).getVastaukset().size();
+		}
+		List<Kysymys> kysymykset = kysely.getKysymykset();
+		model.addAttribute("maara", vastaustenMaara);
+		model.addAttribute("kysymykset", kysymykset);
+		return "kysymyksetLista";
+	}
+
+	// Kysymysten lisäys
 	@RequestMapping(value = "/auth/addkysymys/{id}", method = RequestMethod.GET)
 	@PreAuthorize("hasAnyAuthority('ADMIN')")
 	public String addKysymys(@PathVariable("id") Long kyselyId, Model model) {
@@ -163,10 +161,9 @@ public class HtmlController {
 		kysymys.setKysely(kysely);
 		model.addAttribute("kysymys", kysymys);
 		return "addkysymys";
-
 	}
 
-// Kysymysten tallennus
+	// Kysymysten tallennus
 	@RequestMapping(value = "/auth/savekysymys", method = RequestMethod.POST)
 	@PreAuthorize("hasAnyAuthority('ADMIN')")
 	public String saveKysymys(@Valid @ModelAttribute Kysymys kysymys, BindingResult bindingResult, Model model) {
@@ -179,18 +176,7 @@ public class HtmlController {
 		}
 	}
 
-// Kaikki kysymykset
-	@RequestMapping(value = "/auth/questions/{id}", method = RequestMethod.GET)
-	@PreAuthorize("hasAnyAuthority('ADMIN')")
-	public String kyssarit(@PathVariable("id") Long kyselyId, Model model) {
-		Kysely kysely = kyselyRepository.findById(kyselyId).get();
-		List<Kysymys> kysymykset = kysely.getKysymykset();
-		model.addAttribute("kysymykset", kysymykset);
-		return "kysymyksetLista";
-
-	}
-
-// Kysymyksen poisto, lisätty /auth endpointtiin
+	// Kysymyksen poisto, lisätty /auth endpointtiin
 	@PreAuthorize("hasAuthority('ADMIN')")
 	@RequestMapping(value = "/auth/deletekysymys/{id}", method = RequestMethod.GET)
 	public String deleteKysymys(@PathVariable("id") Long kysid, Model model) {
@@ -198,31 +184,51 @@ public class HtmlController {
 		return "redirect:../kysely";
 	}
 
-// Kysymyksen editointi
+	// Kysymyksen editointi
 	@RequestMapping(value = "/auth/editkys/{id}", method = RequestMethod.GET)
 	@PreAuthorize("hasAnyAuthority('ADMIN')")
 	public String editKys(@PathVariable("id") Long kysid, Model model) {
 		Kysymys kysymys = kysrepository.findById(kysid).get();
 		model.addAttribute("kysymys", kysymys);
-
 		return "editkys";
 	}
 
+	// Kysymyksen edit-version tallennus
 	@RequestMapping(value = "/auth/saveeditkys", method = RequestMethod.POST)
 	public String saveEditedKys(@Valid @ModelAttribute Kysymys kysymys, BindingResult bindingResult, Model model) {
 		if (bindingResult.hasErrors()) { // Jos tulee virheitä
 			model.addAttribute("kysymys", kysymys);
-
 			return "editkys";
 		} else { // Jos kaikki menee oikein
 			kysrepository.save(kysymys);
 			model.addAttribute("kysymys", kysymys);
-
 			return "redirect:/auth/kysely";
 		}
 	}
 
-// Lisää vaihtoehto
+// Viimeisenä sitten vaihtoehdot
+
+	// Haetaan kaikki vaihtoehdot kysymys id perusteella
+	@RequestMapping(value = "/auth/vaihtikset/{id}", method = RequestMethod.GET)
+	@PreAuthorize("hasAnyAuthority('ADMIN')")
+	public String vaihtikset(@PathVariable("id") Long kysid, Model model) {
+		Kysymys kysymys = kysrepository.findById(kysid).get();
+		List<Vaihtoehto> vaihdot = kysymys.getVaihtoehdot();
+		model.addAttribute("vaihdot", vaihdot);
+		return "vaihtoLista";
+
+	}
+
+	// Kaikki vaihtoehdot
+	@RequestMapping(value = "/auth/allvaihto", method = RequestMethod.GET)
+	@PreAuthorize("hasAnyAuthority('ADMIN')")
+	public String getAllVaihto(Model model) {
+		List<Vaihtoehto> vaihtoehdot = (List<Vaihtoehto>) veRepository.findAll();
+		model.addAttribute("vaihtoehdot", vaihtoehdot);
+		return "allVaihto";
+	}
+
+	// Lisää vaihtoehto
 	@RequestMapping(value = "/auth/addvaihto/{id}", method = RequestMethod.GET)
 	@PreAuthorize("hasAnyAuthority('ADMIN')")
 	public String addVaihtoehto(@PathVariable("id") Long kysid, Model model) {
@@ -234,7 +240,7 @@ public class HtmlController {
 
 	}
 
-// Tallenna vaihtoehto
+	// Tallenna vaihtoehto
 	@RequestMapping(value = "/auth/saveVaihto", method = RequestMethod.POST)
 	@PreAuthorize("hasAnyAuthority('ADMIN')")
 	public String saveVaihtoehdot(@Valid @ModelAttribute Vaihtoehto vaihtoehto, BindingResult bindingResult,
@@ -247,27 +253,7 @@ public class HtmlController {
 		}
 	}
 
-// Hae kaikki vaihtoehdot
-	@RequestMapping(value = "/auth/vaihtikset/{id}", method = RequestMethod.GET)
-	@PreAuthorize("hasAnyAuthority('ADMIN')")
-	public String vaihtikset(@PathVariable("id") Long kysid, Model model) {
-		Kysymys kysymys = kysrepository.findById(kysid).get();
-		List<Vaihtoehto> vaihdot = kysymys.getVaihtoehdot();
-		model.addAttribute("vaihdot", vaihdot);
-		return "vaihtoLista";
-
-	}
-
-// Kaikki vaihtoehdot
-	@RequestMapping(value = "/auth/allvaihto", method = RequestMethod.GET)
-	@PreAuthorize("hasAnyAuthority('ADMIN')")
-	public String getAllVaihto(Model model) {
-		List<Vaihtoehto> vaihtoehdot = (List<Vaihtoehto>) veRepository.findAll();
-		model.addAttribute("vaihtoehdot", vaihtoehdot);
-		return "allVaihto";
-	}
-
-// Vaihtoehtojen poisto
+	// Vaihtoehtojen poisto
 	@PreAuthorize("hasAuthority('ADMIN')")
 	@RequestMapping(value = "/auth/deletevaihto/{id}", method = RequestMethod.GET)
 	public String deleteVaihto(@PathVariable("id") Long veId, Model model) {
@@ -275,28 +261,25 @@ public class HtmlController {
 		return "redirect:../kysely";
 	}
 
-// Vaihtoehtojen editointi
+	// Vaihtoehtojen editointi
 	@RequestMapping(value = "/auth/editvaiht/{id}", method = RequestMethod.GET)
 	@PreAuthorize("hasAnyAuthority('ADMIN')")
 	public String editVaiht(@PathVariable("id") Long veId, Model model) {
 		Vaihtoehto vaihtoehto = veRepository.findById(veId).get();
 		model.addAttribute("vaihtoehto", vaihtoehto);
-
 		return "editvaihto";
 	}
 
-// Vaihtehdon editoinnin tallennus
+	// Vaihtehdon editoinnin tallennus
 	@RequestMapping(value = "/auth/saveeditvaiht", method = RequestMethod.POST)
 	public String saveEditedVaiht(@Valid @ModelAttribute Vaihtoehto vaihtoehto, BindingResult bindingResult,
 			Model model) {
 		if (bindingResult.hasErrors()) { // Jos tulee virheitä
 			model.addAttribute("vaihtoehto", vaihtoehto);
-
 			return "editvaihto";
 		} else { // Jos kaikki menee oikein
 			veRepository.save(vaihtoehto);
 			model.addAttribute("vaihtoehto", vaihtoehto);
-
 			return "redirect:/auth/kysely";
 		}
 	}

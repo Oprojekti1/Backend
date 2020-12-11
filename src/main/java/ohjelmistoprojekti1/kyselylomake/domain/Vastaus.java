@@ -15,8 +15,8 @@ public class Vastaus {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long vastid;
 	private String vast;
-	
 
+	// Luodaan tietokanta yhteys kysymys tauluuun
 	@JsonBackReference
 	@ManyToOne
 	@JoinColumn(name = "kysid")
