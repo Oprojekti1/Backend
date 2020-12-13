@@ -76,6 +76,29 @@ public class LinkedService {
 					
 					        return tulos2;
 					    }
+					 
+						public static  Map<List<Vaihtoehto>, Integer> getVastausByVaihtoehto(List<Vastaus> vastaukset) {
+							
+							Map<List<Vaihtoehto>, Integer> tulokset2 = vastausByVaihto(vastaukset); // Key = Vastaus, Integer = value
+							
+							System.out.println("Miten tämä toimii" + " " + tulokset2);
+						
+							return tulokset2;
+							}
+
+							 private static  Map<List<Vaihtoehto>, Integer> vastausByVaihto(List<Vastaus> listat) {  // The T type indicates that it can refer to any type
+							        Map<List<Vaihtoehto>, Integer> tulos2 = new HashMap<>();
+							        for (Vastaus vastaus : listat) {
+							            if (tulos2.containsKey(vastaus.getKysymys().getVaihtoehdot())) {	//Containskey =  Returns true if this map contains a mapping for the specified key. 
+							                tulos2.put(vastaus.getKysymys().getVaihtoehdot(), tulos2.get(vastaus.getKysymys().getVaihtoehdot()) + 1);
+							            } else {
+							                tulos2.put(vastaus.getKysymys().getVaihtoehdot(), 1);
+							            }
+							        }
+							        
+							
+							        return tulos2;
+							    }	 
 			 
 	
 }

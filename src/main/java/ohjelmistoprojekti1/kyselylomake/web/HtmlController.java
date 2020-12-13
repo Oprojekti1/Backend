@@ -19,7 +19,7 @@ import ohjelmistoprojekti1.kyselylomake.domain.Kysely;
 import ohjelmistoprojekti1.kyselylomake.domain.KyselyRepository;
 import ohjelmistoprojekti1.kyselylomake.domain.Kysymys;
 import ohjelmistoprojekti1.kyselylomake.domain.KysymysRepository;
-
+import ohjelmistoprojekti1.kyselylomake.domain.LinkedService;
 import ohjelmistoprojekti1.kyselylomake.domain.Vaihtoehto;
 import ohjelmistoprojekti1.kyselylomake.domain.VaihtoehtoRepository;
 import ohjelmistoprojekti1.kyselylomake.domain.Vastaus;
@@ -57,11 +57,12 @@ public class HtmlController { // Tässä löytyy kaikkien luokkien endpointit th
 	@PreAuthorize("hasAnyAuthority('ADMIN')")
 	public String vastauksetkys(@PathVariable("id") Long kysId, Model model) {
 		Kysymys kysymys = kysrepository.findById(kysId).get();
-		List<Vastaus> vast = kysymys.getVastaukset();
-		model.addAttribute("vast", vast);
+		List<Vastaus> vastaukset = kysymys.getVastaukset();
+		model.addAttribute("vastaukset", vastaukset);
 		model.addAttribute("vaihtoehdot", kysymys.getVaihtoehdot());
 		// If lauseella katsotaan löytyykö vaihtoehtoja riippuen kysymystyypistä
 		// Jos kysymystyypillä ei ole vaihtoehtoja, on sille oma html file
+		// Tämä lisättiin koska avoin teksti vastaukset eivät tulleet näkyviin
 		if (kysymys.getKysymystyyppi() == Kysymystyyppi.avoin) {
 			return "avoinkys"; // tässä ei ole vaihtoehtoja
 		} else if (kysymys.getKysymystyyppi() == Kysymystyyppi.radio) {
@@ -141,6 +142,7 @@ public class HtmlController { // Tässä löytyy kaikkien luokkien endpointit th
 	@PreAuthorize("hasAnyAuthority('ADMIN')")
 	public String kyssarit(@PathVariable("id") Long kyselyId, Model model) {
 		Kysely kysely = kyselyRepository.findById(kyselyId).get();
+		// käyetetään for loopia jotta saadaan kaikki vastaukset kysely id perusteella
 		int vastaustenMaara = 0;
 		for (int i = 0; i < kysely.getKysymykset().size(); i++) {
 			System.out.println(kysely.getKysymykset().get(i).getVastaukset().size());
