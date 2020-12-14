@@ -38,8 +38,8 @@ public class KyselylomakeApplication {
 
 			// luodaan kyselyrepositorio jonne tallennetaan kyselyitä jotka jokainen voivat
 			// sisältäää useita kysymyksiä
-			Kysely kysely = new Kysely("Ensinmmäinen",
-					"Tässä kyselään sukupuoli tietoja, harrastuksia ja muita mielenkiinnon kohteita");
+			Kysely kysely = new Kysely("Ensimmäinen",
+					"Tässä kysellään sukupuolitietoja, harrastuksia ja muita mielenkiinnon kohteita");
 			kyselyRepository.save(kysely);
 
 			log.info("Tallenna kysymyksiä");
