@@ -16,9 +16,9 @@
 	<form th:object="${vaihtoehto}" th:action="@{/auth/saveeditvaiht}"
 		action="#" method="post">
 		<br>
-			<div>
+		<div>
 			<input type="hidden" th:field="${vaihtoehto.veId}" />
-			</div>
+		</div>
 		<div>
 			<p th:if="${#fields.hasErrors('vaihtoehtoja')}"
 				th:errors="*{vaihtoehtoja}">Error</p>

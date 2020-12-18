@@ -10,7 +10,7 @@
 </head>
 <body>
 	<header>
-		<h1>Kysymysten vastaukset</h1>
+		<h1>Listaus vastauksista</h1>
 	</header>
 	<div class="topnav">
 		<a class="active" href="/auth/kysely">Koti</a> <a class="active"
@@ -23,9 +23,10 @@
 			<th>Id</th>
 			<th>Vastaus</th>
 		</tr>
+		<tr>
 		<tr th:each="vastaus : ${vastaukset}">
-			<td th:text="${vastaus.vastid}">Id</td>
-			<td th:text="${vastaus.vast}">Vastaus</td>
+			<td th:text="${vastaus.vastid}">vastaus</td>
+			<td th:text="${vastaus.vast}">vastaus</td>
 		</tr>
 	</table>
 </body>

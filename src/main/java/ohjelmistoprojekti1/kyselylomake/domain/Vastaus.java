@@ -16,6 +16,7 @@ public class Vastaus {
 	private Long vastid;
 	private String vast;
 
+	// Luodaan tietokanta yhteys kysymys tauluuun
 	@JsonBackReference
 	@ManyToOne
 	@JoinColumn(name = "kysid")

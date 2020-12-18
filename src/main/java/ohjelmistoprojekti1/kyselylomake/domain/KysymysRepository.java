@@ -8,8 +8,9 @@ import ohjelmistoprojekti1.kyselylomake.domain.Kysymys.Kysymystyyppi;
 @Repository
 public interface KysymysRepository extends CrudRepository<Kysymys, Long> {
 	Kysymys findBykys(String kys);
-	Kysymys findByKysid(Long kysid);//tämä lisätty
-     Kysymys findByKysymystyyppi(Kysymystyyppi kysymystyyppi);
-	
+
+	Kysymys findByKysid(Long kysid);// tämä lisätty
+
+	Kysymys findByKysymystyyppi(Kysymystyyppi kysymystyyppi);
 
 }

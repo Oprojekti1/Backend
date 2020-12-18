@@ -24,47 +24,40 @@ import ohjelmistoprojekti1.kyselylomake.domain.VaihtoehtoRepository;
 
 @CrossOrigin
 @Controller
-public class KyselyController {
+public class KyselyController { // Tässä osiossa löytyy sekä kyselyn että kysymysten rest endpointit
 	@Autowired
 	private KysymysRepository kysrepository;
 
 	@Autowired
 	private KyselyRepository kyselyRepository;
 
-	@Autowired
-	private VaihtoehtoRepository vrepository;
-
-	// Restful service to get all the questions
+	// Haetaan kaikki kysymykset
 	@RequestMapping(value = "/kysymykset", method = RequestMethod.GET)
-
 	public @ResponseBody List<Kysymys> kysListRest() {
 		return (List<Kysymys>) kysrepository.findAll();
 	}
 
-	// Restful service to get question by id
+	// Haetaan kysymykset id perusteella
 	@RequestMapping(value = "/kysymykset/{kysid}", method = RequestMethod.GET)
-
 	public @ResponseBody Optional<Kysymys> findKysRest(@PathVariable("kysid") Long kysid) {
 		return kysrepository.findById(kysid);
 	}
 
-	// Restful service to save a new question
+	// Tallennetaan uusi kysymys
 	@RequestMapping(value = "/kysymykset", method = RequestMethod.POST)
 	public @ResponseBody Kysymys saveKysRest(@RequestBody Kysymys kysymys) {
 		return kysrepository.save(kysymys);
 	}
 
-	// Restful service haetaan kysely
+	// Haetaan kyselyt
 	@RequestMapping(value = "/kyselyt", method = RequestMethod.GET)
-
 	public @ResponseBody List<Kysely> kyselyListRest() {
 		return (List<Kysely>) kyselyRepository.findAll();
 	}
 
-	@RequestMapping(value = "/kyselyt/{kyselyId}", method = RequestMethod.GET)
-
+	// Haetaan kyselyt id perusteella
+	@RequestMapping(value = "/kysely/{kyselyId}", method = RequestMethod.GET)
 	public @ResponseBody Optional<Kysely> findKyselyRest(@PathVariable("kyselyId") Long kyselyId) {
-
 		System.out.println(kyselyRepository.findById(kyselyId));
 		return kyselyRepository.findById(kyselyId);
 

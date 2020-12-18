@@ -26,26 +26,26 @@ import ohjelmistoprojekti1.kyselylomake.domain.Vastaus;
 
 @CrossOrigin
 @Controller
-public class VaihtoehtoController {
+public class VaihtoehtoController { // Tässä osiossa löytyy vaihtoehtojen rest endpointit
 	@Autowired
 	private VaihtoehtoRepository veRepository;
 
 	@Autowired
 	private KysymysRepository kysrepository;
 
-	// Restful service to get all options
+	// Haetaan kaikki vaihtoehdot
 	@RequestMapping(value = "/vaihtoehdot", method = RequestMethod.GET)
 	public @ResponseBody List<Vaihtoehto> vahListRest() {
 		return (List<Vaihtoehto>) veRepository.findAll();
 	}
 
-	// Restful service to get options by id
+	// Haetaan vaihtoehdot id perusteella
 	@RequestMapping(value = "/vaihtoehdot/{veId}", method = RequestMethod.GET)
 	public @ResponseBody Vaihtoehto findVastRest(@PathVariable("veId") Long veId) {
 		return veRepository.findByveId(veId);
 	}
 
-	// Restful service to save a new option
+	// Haetaan vaihtoehdot kysymys id perusteella
 	@RequestMapping(value = "/vaihtoehto/{kysid}", method = RequestMethod.POST)
 	public @ResponseBody Vaihtoehto saveVaihtRest(@PathVariable("kysid") Long kysid,
 			@RequestBody Vaihtoehto vaihtoehto) {
@@ -53,7 +53,5 @@ public class VaihtoehtoController {
 		vaihtoehto.setKysymys(kysymys);
 		return veRepository.save(vaihtoehto);
 	}
-
-
 
 }
